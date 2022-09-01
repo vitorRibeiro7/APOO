@@ -3,15 +3,11 @@
 class key
 {
 private:
-    char dado;
-
 public:
-    key()
-    {
-    }
+    key();
 
     void press();
-    void setKeyboard();
+    void setKeyboard(keyboard);
 
     ~key();
 };
