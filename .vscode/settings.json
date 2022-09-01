@@ -1,0 +1,9 @@
+{
+    "yaml.customTags": [
+        "!script"
+    ],
+    "makefile.extensionOutputFolder": "./.vscode",
+    "files.associations": {
+        "*.h++": "cpp"
+    }
+}
