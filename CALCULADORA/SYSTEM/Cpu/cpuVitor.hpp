@@ -1,14 +1,14 @@
 #include "iostream"
 
-class cpu
+class Cpu
 {
 private:
     /* data */
 public:
-    cpu(/* args */);
+    Cpu(/* args */);
 
     virtual void recieveDigit();
     virtual void setDisplay();
 
-    ~cpu();
+    ~Cpu();
 };

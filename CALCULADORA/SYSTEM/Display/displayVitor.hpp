@@ -1,16 +1,17 @@
 #pragma once
 #include "iostream"
+#include "calculatorVitor.hpp"
 
-class display
+class DisplayVitor
 {
 private:
     /* data */
 public:
-    display(/* args */);
+    DisplayVitor(/* args */);
 
     virtual void addDigit(Digit);
     virtual void setSignal(Signal);
     virtual void clear();
 
-    ~display();
+    ~DisplayVitor();
 };

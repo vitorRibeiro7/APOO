@@ -1,15 +1,16 @@
 #include "iostream"
+#include "calculatorVitor.hpp"
 
-class keyboard
+class Keyboard
 {
 private:
     /* data */
 public:
-    keyboard(/* args */);
+    Keyboard(/* args */);
 
     virtual key findKey(char);
     virtual void recieveDigit(int);
     virtual void setCpu(cpu);
 
-    ~keyboard();
+    ~Keyboard();
 };

@@ -1,13 +1,15 @@
 #include "iostream"
+#include "calculatorVitor.hpp"
 
-class key
+
+class Key
 {
 private:
 public:
-    key();
+    Key();
 
     virtual void press();
     virtual void setKeyboard(keyboard);
 
-    ~key();
+    ~Key();
 };
