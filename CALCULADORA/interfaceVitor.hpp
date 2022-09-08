@@ -1,10 +1,10 @@
 #include "iostream"
 
-#include "./display.h++"
-#include "./calculator.h++"
-#include "./cpu.h++"
-#include "./key.h++"
-#include "./keyboard.h++"
+#include "./displayVitor.hpp"
+#include "./calculatorVitor.hpp"
+#include "./cpuVitor.hpp"
+#include "./keyVitor.hpp"
+#include "./keyboardVitor.hpp"
 
 enum Digit
 {
