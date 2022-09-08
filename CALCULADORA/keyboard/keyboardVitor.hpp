@@ -7,9 +7,9 @@ private:
 public:
     keyboard(/* args */);
 
-    key findKey(char);
-    void recieveDigit(int);
-    void setCpu(cpu);
+    virtual key findKey(char);
+    virtual void recieveDigit(int);
+    virtual void setCpu(cpu);
 
     ~keyboard();
 };

@@ -7,8 +7,8 @@ private:
 public:
     cpu(/* args */);
 
-    void recieveDigit();
-    void setDisplay();
+    virtual void recieveDigit();
+    virtual void setDisplay();
 
     ~cpu();
 };

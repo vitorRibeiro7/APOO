@@ -7,9 +7,9 @@ private:
 public:
     display(/* args */);
 
-    void addDigit(Digit);
-    void setSignal(Signal);
-    void clear();
+    virtual void addDigit(Digit);
+    virtual void setSignal(Signal);
+    virtual void clear();
 
     ~display();
 };

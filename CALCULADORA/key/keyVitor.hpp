@@ -6,8 +6,8 @@ private:
 public:
     key();
 
-    void press();
-    void setKeyboard(keyboard);
+    virtual void press();
+    virtual void setKeyboard(keyboard);
 
     ~key();
 };

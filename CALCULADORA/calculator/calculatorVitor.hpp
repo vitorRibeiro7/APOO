@@ -7,9 +7,9 @@ private:
 public:
     calculator(/* args */);
 
-    void setDisplay();
-    void setKeyboard();
-    void setCpu();
+    virtual void setDisplay();
+    virtual void setKeyboard();
+    virtual void setCpu();
 
     ~calculator();
 };
