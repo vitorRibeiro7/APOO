@@ -1,17 +1,22 @@
 #pragma once
-#include "iostream"
-#include "calculatorVitor.hpp"
+#include "../Calculator/calculatorVitor.hpp"
+#include "../Console/consoleVitor.hpp"
 
-class DisplayVitor
+#define MAX_DIGITS 8
+
+class DisplayVitor : public Display
 {
 private:
-    /* data */
+    Console console;
+    Digit digits[MAX_DIGITS];
+    unsigned char digitsCount = 0;
+    Signal signal = POSITIVE;
+    void refresh();
+    void showDigitShape(const char *line1, const char *line2, const char *line3, const char *line4, const char *line5, unsigned char column);
+
 public:
-    DisplayVitor(/* args */);
-
-    virtual void addDigit(Digit);
-    virtual void setSignal(Signal);
-    virtual void clear();
-
-    ~DisplayVitor();
+    DisplayVitor();
+    void addDigit(Digit digit);
+    void setSignal(Signal signal);
+    void clear();
 };

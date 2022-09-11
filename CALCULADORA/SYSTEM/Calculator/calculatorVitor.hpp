@@ -1,9 +1,4 @@
-#include "iostream"
-#include "./displayVitor.hpp"
-#include "./calculatorVitor.hpp"
-#include "./cpuVitor.hpp"
-#include "./keyVitor.hpp"
-#include "./keyboardVitor.hpp"
+#pragma once
 
 enum Digit
 {
@@ -25,16 +20,33 @@ enum Signal
     NEGATIVE
 };
 
-class Calculator
+class Display
 {
-private:
-    /* data */
 public:
-    Calculator(/* args */);
+    virtual void addDigit(Digit);
+    virtual void setSignal(Signal);
+    virtual void clear();
+};
 
-    virtual void setDisplay();
-    virtual void setKeyboard();
-    virtual void setCpu();
+class Cpu
+{
+public:
+    virtual void receiveDigit(int);
+    virtual void setDisplay(Display);
+};
 
-    ~Calculator();
+class Key;
+class Keyboard
+{
+public:
+    virtual void receiveDigit(int);
+    virtual Key findKey(char);
+    virtual void setCpu(Cpu);
+};
+
+class Key
+{
+public:
+    virtual void press();
+    virtual void setKeyboard(Keyboard);
 };
