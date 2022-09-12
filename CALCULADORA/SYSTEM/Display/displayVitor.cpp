@@ -22,55 +22,52 @@ void DisplayVitor::refresh()
         switch (this->digits[i - 1])
         {
         case ZERO:
-            this->console.set_cursor(1, 1 + i * 5);
-            printf("0000");
-            this->console.set_cursor(2, 1 + i * 5);
-            printf("0  0");
-            this->console.set_cursor(3, 1 + i * 5);
-            printf("0  0");
-            this->console.set_cursor(4, 1 + i * 5);
-            printf("0  0");
-            this->console.set_cursor(5, 1 + i * 5);
-            printf("0000");
+            this->showDigitShape("..####..", ".##..##.", ".##..##.", ".##..##.", "..####..", i);
             break;
         case ONE:
-            this->console.set_cursor(1, 1 + i * 5);
-            printf("   1");
-            this->console.set_cursor(2, 1 + i * 5);
-            printf("   1");
-            this->console.set_cursor(3, 1 + i * 5);
-            printf("   1");
-            this->console.set_cursor(4, 1 + i * 5);
-            printf("   1");
-            this->console.set_cursor(5, 1 + i * 5);
-            printf("   1");
+            this->showDigitShape("...##...", "..###...", "...##...", "...##...", ".######.", i);
             break;
         case TWO:
-            this->showDigitShape("2222", "   2", "2222", "2  ", "2222", i);
+            this->showDigitShape("..####..", ".....##.", "..####..", ".##.....", ".######.", i);
             break;
         case THREE:
-            this->showDigitShape("😀😀", "  😀", "😀😀", "  😀", "😀😀", i);
+            this->showDigitShape(".######.", "....##..", "...###..", ".....##.", ".#####..", i);
             break;
         case FOUR:
-            this->showDigitShape("█  █", "█  █", "████", "   █", "   █", i);
+            this->showDigitShape(".##..##.", ".##..##.", ".######.", ".....##.", ".....##.", i);
+            break;
+        case FIVE:
+            this->showDigitShape(".######.", ".##.....", "..####..", ".....##.", ".#####..", i);
+            break;
+        case SIX:
+            this->showDigitShape("...##...", "..##....", ".#####..", ".##..##.", "..####..", i);
+            break;
+        case SEVEN:
+            this->showDigitShape(".######.", "....##.", "...##...", "..##....", ".##.....", i);
+            break;
+        case EIGHT:
+            this->showDigitShape("..####..", ".##..##.", "..####..", ".##..##.", "..####..", i);
+            break;
+        case NINE:
+            this->showDigitShape("..####..", ".##..##.", "..####..", "...##...", "..##....", i);
             break;
         default:
-            this->showDigitShape(" ██ ", "█  █", "  █ ", "    ", "  █ ", i);
+            this->showDigitShape("..####..", ".##..##.", "....##..", "...##...", "...##...", i);
         }
     }
 }
 
 void DisplayVitor::showDigitShape(const char *line1, const char *line2, const char *line3, const char *line4, const char *line5, unsigned char column)
 {
-    this->console.set_cursor(1, 1 + column * 5);
+    this->console.set_cursor(1, 1 + column * 8);
     printf(line1);
-    this->console.set_cursor(2, 1 + column * 5);
+    this->console.set_cursor(2, 1 + column * 8);
     printf(line2);
-    this->console.set_cursor(3, 1 + column * 5);
+    this->console.set_cursor(3, 1 + column * 8);
     printf(line3);
-    this->console.set_cursor(4, 1 + column * 5);
+    this->console.set_cursor(4, 1 + column * 8);
     printf(line4);
-    this->console.set_cursor(5, 1 + column * 5);
+    this->console.set_cursor(8, 1 + column * 8);
     printf(line5);
 }
 
