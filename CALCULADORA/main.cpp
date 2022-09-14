@@ -6,18 +6,20 @@ int main()
 {
   Display *d1 = new DisplayVitor();
 
-  d1->setSignal(NEGATIVE);
-  d1->addDigit(ZERO);
-  d1->addDigit(ZERO);
+  // d1->setSignal(NEGATIVE);
+  // d1->setSignal(POSITIVE);
   d1->addDigit(ZERO);
   d1->addDigit(ONE);
   d1->addDigit(TWO);
   d1->addDigit(THREE);
   d1->addDigit(FOUR);
   d1->addDigit(FIVE);
-  d1->addDigit(ZERO);
-  d1->addDigit(ONE);
-  //   d1.clear();
+  d1->addDigit(SIX);
+  d1->addDigit(SEVEN);
+  d1->addDigit(EIGHT);
+  d1->addDigit(EIGHT);
+  d1->addDigit(NINE);
+  // d1->clear();
 
   /*
   Calculator c1;

@@ -23,30 +23,30 @@ enum Signal
 class Display
 {
 public:
-    virtual void addDigit(Digit);
-    virtual void setSignal(Signal);
-    virtual void clear();
+    virtual void addDigit(Digit) = 0;
+    virtual void setSignal(Signal) = 0;
+    virtual void clear() = 0;
 };
 
 class Cpu
 {
 public:
-    virtual void receiveDigit(int);
-    virtual void setDisplay(Display);
+    virtual void receiveDigit(int)=0;
+    virtual void setDisplay(Display&)=0;
 };
 
 class Key;
 class Keyboard
 {
 public:
-    virtual void receiveDigit(int);
-    virtual Key findKey(char);
-    virtual void setCpu(Cpu);
+    virtual void receiveDigit(int)=0;
+    virtual Key findKey(char)=0;
+    virtual void setCpu(Cpu&)=0;
 };
 
 class Key
 {
 public:
     virtual void press();
-    virtual void setKeyboard(Keyboard);
+    virtual void setKeyboard(Keyboard&);
 };

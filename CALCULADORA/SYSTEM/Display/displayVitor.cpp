@@ -4,17 +4,17 @@
 
 void DisplayVitor::refresh()
 {
-    console.set_color(Color::BG_Green);
+    console.set_color(Color::BG_Red);
     console.set_color(Color::FG_White);
     console.clear_screen();
 
     if (signal == NEGATIVE)
     {
-        this->showDigitShape("    ", "    ", "████", "    ", "    ", 0);
+        this->showDigitShape("........", "........", ".000000.", "........", "........", 0);
     }
     else
     {
-        this->showDigitShape("    ", "  █ ", " ███", "  █ ", "    ", 0);
+        this->showDigitShape("...00...", "...00...", ".000000.", "...00...", "...00...", 0);
     }
 
     for (int i = 1; i <= this->digitsCount; i++)
@@ -22,37 +22,37 @@ void DisplayVitor::refresh()
         switch (this->digits[i - 1])
         {
         case ZERO:
-            this->showDigitShape("..####..", ".##..##.", ".##..##.", ".##..##.", "..####..", i);
+            this->showDigitShape("..0000..", ".00..00.", ".00..00.", ".00..00.", "..0000..", i);
             break;
         case ONE:
-            this->showDigitShape("...##...", "..###...", "...##...", "...##...", ".######.", i);
+            this->showDigitShape("...00...", "..000...", "...00...", "...00...", ".000000.", i);
             break;
         case TWO:
-            this->showDigitShape("..####..", ".....##.", "..####..", ".##.....", ".######.", i);
+            this->showDigitShape("..0000..", ".....00.", "..0000..", ".00.....", ".000000.", i);
             break;
         case THREE:
-            this->showDigitShape(".######.", "....##..", "...###..", ".....##.", ".#####..", i);
+            this->showDigitShape(".000000.", "....00..", "...000..", ".....00.", ".0000#..", i);
             break;
         case FOUR:
-            this->showDigitShape(".##..##.", ".##..##.", ".######.", ".....##.", ".....##.", i);
+            this->showDigitShape(".00..00.", ".00..00.", ".000000.", ".....00.", ".....00.", i);
             break;
         case FIVE:
-            this->showDigitShape(".######.", ".##.....", "..####..", ".....##.", ".#####..", i);
+            this->showDigitShape(".000000.", ".00.....", "..0000..", ".....00.", ".0000#..", i);
             break;
         case SIX:
-            this->showDigitShape("...##...", "..##....", ".#####..", ".##..##.", "..####..", i);
+            this->showDigitShape("...00...", "..00....", ".0000#..", ".00..00.", "..0000..", i);
             break;
         case SEVEN:
-            this->showDigitShape(".######.", "....##.", "...##...", "..##....", ".##.....", i);
+            this->showDigitShape(".000000.", "....00..", "...00...", "..00....", ".00.....", i);
             break;
         case EIGHT:
-            this->showDigitShape("..####..", ".##..##.", "..####..", ".##..##.", "..####..", i);
+            this->showDigitShape("..0000..", ".00..00.", "..0000..", ".00..00.", "..0000..", i);
             break;
         case NINE:
-            this->showDigitShape("..####..", ".##..##.", "..####..", "...##...", "..##....", i);
+            this->showDigitShape("..0000..", ".00..00.", "..0000..", "...00...", "..00....", i);
             break;
         default:
-            this->showDigitShape("..####..", ".##..##.", "....##..", "...##...", "...##...", i);
+            this->showDigitShape("..0000..", ".00..00.", "....00..", "...00...", "...00...", i);
         }
     }
 }
@@ -67,7 +67,7 @@ void DisplayVitor::showDigitShape(const char *line1, const char *line2, const ch
     printf(line3);
     this->console.set_cursor(4, 1 + column * 8);
     printf(line4);
-    this->console.set_cursor(8, 1 + column * 8);
+    this->console.set_cursor(5, 1 + column * 8);
     printf(line5);
 }
 
@@ -95,5 +95,5 @@ void DisplayVitor::setSignal(Signal signal)
 void DisplayVitor::clear()
 {
     this->digitsCount = 0;
-    this->refresh();
+    console.clear_screen();
 }
