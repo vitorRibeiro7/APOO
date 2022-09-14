@@ -20,6 +20,14 @@ enum Signal
     NEGATIVE
 };
 
+enum Operator
+{
+    MULTIPLICATION,
+    ADDICTION,
+    DIVISION,
+    SUBTRACTION
+};
+
 class Display
 {
 public:
@@ -31,22 +39,22 @@ public:
 class Cpu
 {
 public:
-    virtual void receiveDigit(int)=0;
-    virtual void setDisplay(Display&)=0;
+    virtual void receiveDigit(int) = 0;
+    virtual void setDisplay(Display &) = 0;
 };
 
 class Key;
 class Keyboard
 {
 public:
-    virtual void receiveDigit(int)=0;
-    virtual Key findKey(char)=0;
-    virtual void setCpu(Cpu&)=0;
+    virtual void receiveDigit(int) = 0;
+    virtual Key findKey(char) = 0;
+    virtual void setCpu(Cpu &) = 0;
 };
 
 class Key
 {
 public:
     virtual void press();
-    virtual void setKeyboard(Keyboard&);
+    virtual void setKeyboard(Keyboard &);
 };
