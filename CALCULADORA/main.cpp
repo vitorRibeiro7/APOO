@@ -1,32 +1,51 @@
 // #pragma once
+#include <iostream>
 #include "SYSTEM/Calculator/calculatorVitor.hpp"
+#include "SYSTEM/Cpu/cpuVitor.hpp"
 #include "SYSTEM/Display/displayVitor.hpp"
+
+void testDisplay(DisplayVitor &display)
+{
+  std::cout << "Testing DISPLAY...\n";
+  display.setSignal(NEGATIVE);
+  display.addDigit(ZERO);
+  display.clear();
+  display.addDigit(ZERO);
+  display.addDigit(ZERO);
+  display.addDigit(ONE);
+  display.addDigit(TWO);
+  display.addDigit(THREE);
+  display.addDigit(FOUR);
+  display.addDigit(FIVE);
+  display.addDigit(ZERO);
+  display.addDigit(ONE);
+}
+
+void testCpu(CpuVitor &cpu)
+{
+  std::cout << "Testing CPU...\n";
+  cpu.receiveControl(ON_CLEAR_ERROR);
+  cpu.receiveDigit(ONE);
+  cpu.receiveDigit(TWO);
+  cpu.receiveDigit(THREE);
+  cpu.receiveOperation(ADDITION);
+  cpu.receiveDigit(FOUR);
+  cpu.receiveDigit(FIVE);
+  cpu.receiveDigit(SIX);
+  cpu.receiveOperation(EQUAL);
+}
 
 int main()
 {
-  Display *d1 = new DisplayVitor();
+  /* Fase de criação */
+  /* Instancie suas implementações aqui */
+  DisplayVitor d1;
+  CpuVitor c1;
 
-  // d1->setSignal(NEGATIVE);
-  // d1->setSignal(POSITIVE);
-  d1->addDigit(ZERO);
-  d1->addDigit(ONE);
-  d1->addDigit(TWO);
-  d1->addDigit(THREE);
-  d1->addDigit(FOUR);
-  d1->addDigit(FIVE);
-  d1->addDigit(SIX);
-  d1->addDigit(SEVEN);
-  d1->addDigit(EIGHT);
-  d1->addDigit(EIGHT);
-  d1->addDigit(NINE);
-  // d1->clear();
+  /* Fase de construção/ligação */
+  c1.setDisplay(d1);
 
-  /*
-  Calculator c1;
-
-  c1.getKeyboard().findKey('1').press();
-  c1.getKeyboard().findKey('+').press();
-  c1.getKeyboard().findKey('1').press();
-  c1.getKeyboard().findKey('=').press();
-*/
+  /* Fase de testes */
+  testDisplay(d1);
+  testCpu(c1);
 }

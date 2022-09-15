@@ -1,12 +1,20 @@
-#pragma once
+#include <iostream>
 #include "../Calculator/calculatorVitor.hpp"
 
+#define MAX_DIGITS 8
 class CpuVitor : public Cpu
 {
 private:
+    Display *display;
+    Digit digitsOperand1[MAX_DIGITS];
+    Digit digitsOperand2[MAX_DIGITS];
+    char digitsOperand1Count = 0;
+    char digitsOperand2Count = 0;
+    Operation operation = NOOP;
+
 public:
-    CpuVitor();
-    virtual void receiveDigit(int) = 0;
-    virtual void receiveOperator(int) = 0;
-    virtual void setDisplay(Display &) = 0;
+    void receiveDigit(Digit);
+    void receiveOperation(Operation);
+    void receiveControl(Control);
+    void setDisplay(Display &);
 };

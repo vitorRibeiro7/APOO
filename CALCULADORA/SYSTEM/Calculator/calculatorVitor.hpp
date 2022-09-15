@@ -20,12 +20,23 @@ enum Signal
     NEGATIVE
 };
 
-enum Operator
+enum Operation
 {
+    ADDITION,
+    SUBTRACTION,
     MULTIPLICATION,
-    ADDICTION,
     DIVISION,
-    SUBTRACTION
+    EQUAL,
+    NOOP
+};
+
+enum Control
+{
+    OFF,
+    ON_CLEAR_ERROR,
+    MEMORY_READ_CLEAR,
+    MEMORY_SUBTRACTION,
+    MEMORY_ADDICTION
 };
 
 class Display
@@ -39,7 +50,9 @@ public:
 class Cpu
 {
 public:
-    virtual void receiveDigit(int) = 0;
+    virtual void receiveDigit(Digit) = 0;  
+    virtual void receiveOperation(Operation) = 0;
+    virtual void receiveControl(Control) = 0;
     virtual void setDisplay(Display &) = 0;
 };
 
@@ -57,4 +70,13 @@ class Key
 public:
     virtual void press();
     virtual void setKeyboard(Keyboard &);
+};
+
+class Controle
+{
+private:
+    /* data */
+public:
+    Controle(/* args */);
+    ~Controle();
 };
