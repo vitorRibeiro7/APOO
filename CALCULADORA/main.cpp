@@ -7,7 +7,7 @@
 void testDisplay(DisplayVitor &display)
 {
   std::cout << "Testing DISPLAY...\n";
-  display.setSignal(NEGATIVE);
+  // display.setSignal(NEGATIVE);
   display.addDigit(ZERO);
   display.clear();
   display.addDigit(ZERO);
@@ -47,5 +47,5 @@ int main()
 
   /* Fase de testes */
   testDisplay(d1);
-  testCpu(c1);
+  // testCpu(c1);
 }

@@ -10,49 +10,52 @@ void DisplayVitor::refresh()
 
     if (signal == NEGATIVE)
     {
-        this->showDigitShape("........", "........", ".000000.", "........", "........", 0);
+        this->showDigitShape("........", "........", ".VVVVVV.", "........", "........", 0);
     }
     else
     {
-        this->showDigitShape("...00...", "...00...", ".000000.", "...00...", "...00...", 0);
+        this->showDigitShape("...VV...", "...VV...", ".VVVVVV.", "...VV...", "...VV...", 0);
     }
 
     for (int i = 1; i <= this->digitsCount; i++)
     {
         switch (this->digits[i - 1])
         {
+
+            // VVVV VVV VV V
+
         case ZERO:
-            this->showDigitShape("..0000..", ".00..00.", ".00..00.", ".00..00.", "..0000..", i);
+            this->showDigitShape("..VVVV..", ".VV..VV.", ".VV..VV.", ".VV..VV.", "..VVVV..", i);
             break;
         case ONE:
-            this->showDigitShape("...00...", "..000...", "...00...", "...00...", ".000000.", i);
+            this->showDigitShape("...VV...", "..VVV...", "...VV...", "...VV...", ".VVVVVV.", i);
             break;
         case TWO:
-            this->showDigitShape("..0000..", ".....00.", "..0000..", ".00.....", ".000000.", i);
+            this->showDigitShape("..VVVV..", ".....VV.", "..VVVV..", ".VV.....", ".VVVVVV.", i);
             break;
         case THREE:
-            this->showDigitShape(".000000.", "....00..", "...000..", ".....00.", ".0000#..", i);
+            this->showDigitShape(".VVVVVV.", "....VV..", "...VVV..", ".....VV.", ".VVVVV..", i);
             break;
         case FOUR:
-            this->showDigitShape(".00..00.", ".00..00.", ".000000.", ".....00.", ".....00.", i);
+            this->showDigitShape(".VV..VV.", ".VV..VV.", ".VVVVVV.", ".....VV.", ".....VV.", i);
             break;
         case FIVE:
-            this->showDigitShape(".000000.", ".00.....", "..0000..", ".....00.", ".0000#..", i);
+            this->showDigitShape(".VVVVVV.", ".VV.....", "..VVVV..", ".....VV.", ".VVVVV..", i);
             break;
         case SIX:
-            this->showDigitShape("...00...", "..00....", ".0000#..", ".00..00.", "..0000..", i);
+            this->showDigitShape("...VV...", "..VV....", ".VVVVV..", ".VV..VV.", "..VVVV..", i);
             break;
         case SEVEN:
-            this->showDigitShape(".000000.", "....00..", "...00...", "..00....", ".00.....", i);
+            this->showDigitShape(".VVVVVV.", "....VV..", "...VV...", "..VV....", ".VV.....", i);
             break;
         case EIGHT:
-            this->showDigitShape("..0000..", ".00..00.", "..0000..", ".00..00.", "..0000..", i);
+            this->showDigitShape("..VVVV..", ".VV..VV.", "..VVVV..", ".VV..VV.", "..VVVV..", i);
             break;
         case NINE:
-            this->showDigitShape("..0000..", ".00..00.", "..0000..", "...00...", "..00....", i);
+            this->showDigitShape("..VVVV..", ".VV..VV.", "..VVVV..", "...VV...", "..VV....", i);
             break;
-        default:
-            this->showDigitShape("..0000..", ".00..00.", "....00..", "...00...", "...00...", i);
+        Vefault:
+            this->showDigitShape("..VVVV..", ".VV..VV.", "....VV..", "...VV...", "...VV...", i);
         }
     }
 }
@@ -96,4 +99,12 @@ void DisplayVitor::clear()
 {
     this->digitsCount = 0;
     console.clear_screen();
+    for (int i = 0; i < 1; i++)
+    {
+        this->showDigitShape("..VVVV..", ".VV..VV.", ".VV..VV.", ".VV..VV.", "..VVVV..", i);
+        for (int j = 1; j < 8; j++)
+        {
+            this->showDigitShape("........", "........", "........", "........", "........", j);
+        }
+    }
 }
