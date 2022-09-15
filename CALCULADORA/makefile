@@ -1,5 +1,6 @@
 all:
-	g++ -c ./SYSTEM/Display/displayVitor.cpp -o ./SYSTEM/Display/displayVitor.o
-	g++ -c ./SYSTEM/Console/consoleVitor.cpp -o ./SYSTEM/Console/consoleVitor.o
-	g++ main.cpp ./SYSTEM/Console/consoleVitor.o ./SYSTEM/Display/displayVitor.o -o main
+	g++ -c ./SYSTEM/Display/displayVitor.cpp -o displayVitor.o
+	g++ -c ./SYSTEM/Console/consoleVitor.cpp -o consoleVitor.o
+	g++ -c ./SYSTEM/Cpu/cpuVitor.cpp -o cpuVitor.o
+	g++ main.cpp consoleVitor.o displayVitor.o cpuVitor.o -o main
 	./main
