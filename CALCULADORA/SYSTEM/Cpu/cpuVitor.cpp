@@ -20,7 +20,7 @@ void CpuVitor::receiveDigit(Digit digit)
 void CpuVitor::receiveOperation(Operation op)
 {
     // Guardo a operação, mas antes verificar se já existe uma definida e já exisite um operand2
-    if ((this->operation != NOOP) && (this->digitsOperand2Count > 0))
+    if ((this->operation != NOOP) && (this->digitsOperand1Count > 0))
     {
         this->operate();
     }
@@ -44,5 +44,4 @@ void CpuVitor::setDisplay(Display &display)
 
 void CpuVitor::operate()
 {
-    
 }

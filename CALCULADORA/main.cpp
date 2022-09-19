@@ -46,6 +46,6 @@ int main()
   c1.setDisplay(d1);
 
   /* Fase de testes */
-  testDisplay(d1);
-  // testCpu(c1);
+  // testDisplay(d1);
+  testCpu(c1);
 }

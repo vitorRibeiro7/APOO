@@ -14,7 +14,7 @@ void DisplayVitor::refresh()
     }
     else
     {
-        this->showDigitShape("...VV...", "...VV...", ".VVVVVV.", "...VV...", "...VV...", 0);
+        this->showDigitShape("........", "........", "........", "........", "........", 0);
     }
 
     for (int i = 1; i <= this->digitsCount; i++)
