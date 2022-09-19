@@ -13,6 +13,7 @@ private:
     Operation operation = NOOP;
     void operate(Operation op);
     Digit intToDigit(int num);
+    int digitsToInt(Digit);
 
 public:
     void receiveDigit(Digit);

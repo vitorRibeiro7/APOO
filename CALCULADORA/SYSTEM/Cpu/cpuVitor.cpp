@@ -22,8 +22,9 @@ void CpuVitor::receiveOperation(Operation op)
     // Guardo a operação, mas antes verificar se já existe uma definida e já exisite um operand2
     if ((this->operation != NOOP) && (this->digitsOperand1Count > 0))
     {
-        this->operate(op);
+        this->operate(operation);
     }
+
     this->operation = op;
 }
 
@@ -33,6 +34,8 @@ void CpuVitor::receiveControl(Control control)
     {
     case ON_CLEAR_ERROR:
         this->display->clear();
+        break;
+    case EQUAL:
         break;
     }
 }
@@ -52,9 +55,6 @@ void CpuVitor::operate(Operation op)
         Digit digit = intToDigit(opp[i]);
         this->digitsOperand1[i] = digit;
     }
-
-    this->digitsOperand2;
-
     free(opp);
 }
 
@@ -98,4 +98,76 @@ Digit CpuVitor::intToDigit(int num)
     }
 
     return ZERO;
+}
+
+void oparate(Operation op)
+{
+
+    switch (op)
+    {
+    case EQUAL:
+        break;
+    case ADDITION:
+        break;
+    case SUBTRACTION:
+        break;
+    case MULTIPLICATION:
+        break;
+    case DIVISION:
+        break;
+    default:
+        break;
+    }
+}
+
+int digitToInt(Digit *digits)
+{
+
+    int amount = 0;
+
+    for (int i = MAX_DIGITS - 1; i > 0; i++)
+    {
+
+        int temp = 0;
+
+        switch (digits[i])
+        {
+        case ZERO:
+            temp = 0;
+            break;
+        case ONE:
+            temp = 1;
+            break;
+        case TWO:
+            temp = 2;
+            break;
+        case THREE:
+            temp = 3;
+            break;
+        case FOUR:
+            temp = 4;
+            break;
+        case FIVE:
+            temp = 5;
+            break;
+        case SIX:
+            temp = 6;
+            break;
+        case SEVEN:
+            temp = 7;
+            break;
+        case EIGHT:
+            temp = 8;
+            break;
+        case NINE:
+            temp = 9;
+            break;
+        default:
+            break;
+        }
+
+        temp = temp * (1*i)
+
+        amount += temp;
+    }
 }

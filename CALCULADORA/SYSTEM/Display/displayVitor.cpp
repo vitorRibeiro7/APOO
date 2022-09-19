@@ -4,7 +4,7 @@
 
 void DisplayVitor::refresh()
 {
-    console.set_color(Color::BG_Red);
+    // console.set_color(Color::BG_Red);
     console.set_color(Color::FG_White);
     console.clear_screen();
 
