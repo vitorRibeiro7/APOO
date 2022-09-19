@@ -129,6 +129,7 @@ int digitToInt(Digit *digits)
     {
 
         int temp = 0;
+        int pin = 1;
 
         switch (digits[i])
         {
@@ -166,8 +167,10 @@ int digitToInt(Digit *digits)
             break;
         }
 
-        temp = temp * (1*i)
-
+        temp = temp * pin;
+        pin = pin * 10;
         amount += temp;
     }
+
+    return amount;
 }
