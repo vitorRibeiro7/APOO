@@ -32,6 +32,7 @@ void testCpu(CpuVitor &cpu)
   cpu.receiveDigit(FOUR);
   cpu.receiveDigit(FIVE);
   cpu.receiveDigit(SIX);
+  cpu.receiveOperation(ADDITION);
   cpu.receiveOperation(EQUAL);
 }
 
