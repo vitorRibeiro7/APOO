@@ -15,7 +15,7 @@ CpuVitor::CpuVitor()
 void CpuVitor::receiveDigit(Digit digit)
 {
 
-    this->digitsOperand1Count == 0 && this->operation == NOOP ? this->display->clear() : void();
+    // this->digitsOperand1Count == 0 && this->operation == NOOP ? this->display->clear() : void();
 
     // Guardo o dígito no operanto correspondente
     if (this->operation == NOOP)
@@ -62,8 +62,8 @@ void CpuVitor::setDisplay(Display &display)
 void CpuVitor::operate(Operation op)
 {
 
-    this->memo1 = convertDigitsToInt(this->digitsOperand1);
-    this->memo2 = convertDigitsToInt(this->digitsOperand2);
+    this->memo1 = digitsToInt(this->digitsOperand1);
+    this->memo2 = digitsToInt(this->digitsOperand2);
 
     switch (op)
     {
@@ -91,13 +91,13 @@ void CpuVitor::operate(Operation op)
     insertDigitsOnDisplay(this->digitsOperand1);
 }
 
-int CpuVitor::convertDigitsToInt(Digit *digits)
+int CpuVitor::digitsToInt(Digit *digits)
 {
 
     int amount = 0;
     int pin = 1;
 
-    for (int i = MAX_DIGITS - 1; i > 0; i++)
+    for (int i = MAX_DIGITS - 1; i >= 0; i++)
     {
 
         int temp = 0;
@@ -146,11 +146,67 @@ int CpuVitor::convertDigitsToInt(Digit *digits)
     return amount;
 }
 
-Digit CpuVitor::convertIntToDigit(int num)
+int CpuVitor::digitsToInt2(Digit *digits)
 {
 
-    char toChar[MAX_DIGITS] = convertIntToChar(num);
+    int amount = 0;
+    int pin = 1;
+
+    for (int i = MAX_DIGITS - 1; i >= 0; i++)
+    {
+
+        int temp = 0;
+
+        switch (digits[i])
+        {
+        case ZERO:
+            temp = 0;
+            break;
+        case ONE:
+            temp = 1;
+            break;
+        case TWO:
+            temp = 2;
+            break;
+        case THREE:
+            temp = 3;
+            break;
+        case FOUR:
+            temp = 4;
+            break;
+        case FIVE:
+            temp = 5;
+            break;
+        case SIX:
+            temp = 6;
+            break;
+        case SEVEN:
+            temp = 7;
+            break;
+        case EIGHT:
+            temp = 8;
+            break;
+        case NINE:
+            temp = 9;
+            break;
+        default:
+            break;
+        }
+
+        temp = temp * pin;
+        pin = pin * 10;
+        amount += temp;
+    }
+
+    return amount;
+}
+
+Digit CpuVitor::intToDigit(int num)
+{
+
     int temp;
+    char *toChar;
+    intToChar(toChar, num);
 
     for (int i = 0; i < MAX_DIGITS; i++)
     {
@@ -207,7 +263,7 @@ void CpuVitor::insertDigitsOnDisplay(Digit *digits)
     for (int i = 0; i < MAX_DIGITS; i++)
     {
 
-        Digit temp = convertIntToDigit(this->memo);
+        Digit temp = intToDigit(this->memo);
 
         switch (temp)
         {
@@ -247,10 +303,9 @@ void CpuVitor::insertDigitsOnDisplay(Digit *digits)
     }
 }
 
-char CpuVitor::convertIntToChar(int num)
+void CpuVitor::intToChar(char *memo, int num)
 {
 
-    char oBrabo[MAX_DIGITS];
     int temp;
 
     for (int i = MAX_DIGITS - 1; i <= 0; i++)
@@ -260,34 +315,34 @@ char CpuVitor::convertIntToChar(int num)
         switch (temp)
         {
         case 0:
-            oBrabo[i] = '0';
+            memo[i] = '0';
             break;
         case 1:
-            oBrabo[i] = '1';
+            memo[i] = '1';
             break;
         case 2:
-            oBrabo[i] = '2';
+            memo[i] = '2';
             break;
         case 3:
-            oBrabo[i] = '3';
+            memo[i] = '3';
             break;
         case 4:
-            oBrabo[i] = '4';
+            memo[i] = '4';
             break;
         case 5:
-            oBrabo[i] = '5';
+            memo[i] = '5';
             break;
         case 6:
-            oBrabo[i] = '6';
+            memo[i] = '6';
             break;
         case 7:
-            oBrabo[i] = '7';
+            memo[i] = '7';
             break;
         case 8:
-            oBrabo[i] = '8';
+            memo[i] = '8';
             break;
         case 9:
-            oBrabo[i] = '9';
+            memo[i] = '9';
             break;
         default:
             break;
@@ -295,6 +350,4 @@ char CpuVitor::convertIntToChar(int num)
 
         temp = temp / 10;
     }
-
-    return oBrabo;
 }

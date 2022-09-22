@@ -13,10 +13,11 @@ private:
     Operation operation = NOOP;
 
     void operate(Operation op);
-    Digit convertIntToDigit(int num);
-    char convertIntToChar(int num);
-    int convertDigitsToInt(Digit *digits);
-    char convertDigitsToChar(Digit);
+    Digit intToDigit(int num);
+    void intToChar(char *memo, int num);
+    int digitsToInt(Digit *digits);
+    int digitsToInt2(Digit *digits);
+    char digitsToChar(Digit);
 
     void resetDigits(Digit *digits);
     void insertDigitsOnDisplay(Digit *digits);
