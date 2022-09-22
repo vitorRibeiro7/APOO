@@ -62,8 +62,8 @@ void CpuVitor::setDisplay(Display &display)
 void CpuVitor::operate(Operation op)
 {
 
-    this->memo1 = digitsToInt(this->digitsOperand1);
-    this->memo2 = digitsToInt(this->digitsOperand2);
+    this->memo1 = convertDigitsToInt(this->digitsOperand1, this->digitsOperand1Count);
+    this->memo2 = convertDigitsToInt(this->digitsOperand2, this->digitsOperand2Count);
 
     switch (op)
     {
@@ -88,19 +88,21 @@ void CpuVitor::operate(Operation op)
     resetDigits(this->digitsOperand2);
     this->digitsOperand2Count = 0;
 
+    convertIntToDigits(this->memo1, 10);
     insertDigitsOnDisplay(this->digitsOperand1);
 }
 
-int CpuVitor::digitsToInt(Digit *digits)
+int CpuVitor::convertDigitsToInt(Digit *digits, char size)
 {
 
     int amount = 0;
-    int pin = 1;
+    int pin = size;
 
-    for (int i = MAX_DIGITS - 1; i >= 0; i++)
+    for (int i = size - 1; i >= 0; i++)
     {
 
         int temp = 0;
+        pin *= 10;
 
         switch (digits[i])
         {
@@ -139,62 +141,6 @@ int CpuVitor::digitsToInt(Digit *digits)
         }
 
         temp = temp * pin;
-        pin = pin * 10;
-        amount += temp;
-    }
-
-    return amount;
-}
-
-int CpuVitor::digitsToInt2(Digit *digits)
-{
-
-    int amount = 0;
-    int pin = 1;
-
-    for (int i = MAX_DIGITS - 1; i >= 0; i++)
-    {
-
-        int temp = 0;
-
-        switch (digits[i])
-        {
-        case ZERO:
-            temp = 0;
-            break;
-        case ONE:
-            temp = 1;
-            break;
-        case TWO:
-            temp = 2;
-            break;
-        case THREE:
-            temp = 3;
-            break;
-        case FOUR:
-            temp = 4;
-            break;
-        case FIVE:
-            temp = 5;
-            break;
-        case SIX:
-            temp = 6;
-            break;
-        case SEVEN:
-            temp = 7;
-            break;
-        case EIGHT:
-            temp = 8;
-            break;
-        case NINE:
-            temp = 9;
-            break;
-        default:
-            break;
-        }
-
-        temp = temp * pin;
-        pin = pin * 10;
         amount += temp;
     }
 

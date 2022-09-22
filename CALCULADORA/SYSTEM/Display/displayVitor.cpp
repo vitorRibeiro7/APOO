@@ -80,7 +80,7 @@ DisplayVitor::DisplayVitor()
     this->clear();
 }
 
-void DisplayVitor::addDigit(Digit digit)
+void DisplayVitor::addDigit(Digit digit, bool withDot = false)
 {
     if (this->digitsCount < MAX_DIGITS)
     {

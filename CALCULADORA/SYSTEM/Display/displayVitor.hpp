@@ -16,7 +16,7 @@ private:
 
 public:
     DisplayVitor();
-    void addDigit(Digit digit);
+    void addDigit(Digit digit, bool withDot = false);
     void setSignal(Signal signal);
     void clear();
 };

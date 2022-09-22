@@ -15,8 +15,8 @@ private:
     void operate(Operation op);
     Digit intToDigit(int num);
     void intToChar(char *memo, int num);
-    int digitsToInt(Digit *digits);
-    int digitsToInt2(Digit *digits);
+    int convertDigitsToInt(Digit *digits, char size);
+    Digit convertIntToDigits(int num, char size);
     char digitsToChar(Digit);
 
     void resetDigits(Digit *digits);

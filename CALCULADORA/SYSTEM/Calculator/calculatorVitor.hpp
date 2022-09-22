@@ -42,7 +42,7 @@ enum Control
 class Display
 {
 public:
-    virtual void addDigit(Digit) = 0;
+    virtual void addDigit(Digit, bool withDot = false) = 0;
     virtual void setSignal(Signal) = 0;
     virtual void clear() = 0;
 };
@@ -50,7 +50,7 @@ public:
 class Cpu
 {
 public:
-    virtual void receiveDigit(Digit) = 0;  
+    virtual void receiveDigit(Digit) = 0;
     virtual void receiveOperation(Operation) = 0;
     virtual void receiveControl(Control) = 0;
     virtual void setDisplay(Display &) = 0;
