@@ -12,19 +12,19 @@ private:
     char digitsOperand2Count = 0;
     Operation operation = NOOP;
 
-    void operate(Operation op);
+    void operate();
     Digit intToDigit(int num);
     void intToChar(char *memo, int num);
-    int convertDigitsToInt(Digit *digits, char size);
-    Digit convertIntToDigits(int num, char size);
+    float convertDigitsToFloat(Digit *digits, char size);
+    Digit convertFloatToDigits(int num);
     char digitsToChar(Digit);
 
     void resetDigits(Digit *digits);
     void insertDigitsOnDisplay(Digit *digits);
 
-    int memo;
-    int memo1;
-    int memo2;
+    float memo;
+    float memo1;
+    float memo2;
 
 public:
     CpuVitor();

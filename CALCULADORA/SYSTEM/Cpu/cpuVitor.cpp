@@ -36,7 +36,7 @@ void CpuVitor::receiveOperation(Operation op)
     // Guardo a operação, mas antes verificar se já existe uma definida e já exisite um operand2
     if ((this->operation != NOOP) && (this->digitsOperand1Count > 0))
     {
-        this->operate(op);
+        this->operate();
     }
 
     this->operation = op;
@@ -59,13 +59,13 @@ void CpuVitor::setDisplay(Display &display)
     this->display = &display;
 }
 
-void CpuVitor::operate(Operation op)
+void CpuVitor::operate()
 {
 
-    this->memo1 = convertDigitsToInt(this->digitsOperand1, this->digitsOperand1Count);
-    this->memo2 = convertDigitsToInt(this->digitsOperand2, this->digitsOperand2Count);
+    this->memo1 = convertDigitsToFloat(this->digitsOperand1, this->digitsOperand1Count);
+    this->memo2 = convertDigitsToFloat(this->digitsOperand2, this->digitsOperand2Count);
 
-    switch (op)
+    switch (this->operation)
     {
     case EQUAL:
         break;
@@ -88,14 +88,14 @@ void CpuVitor::operate(Operation op)
     resetDigits(this->digitsOperand2);
     this->digitsOperand2Count = 0;
 
-    convertIntToDigits(this->memo1, 10);
+    convertFloatToDigits(this->memo1);
     insertDigitsOnDisplay(this->digitsOperand1);
 }
 
-int CpuVitor::convertDigitsToInt(Digit *digits, char size)
+float CpuVitor::convertDigitsToFloat(Digit *digits, char size)
 {
 
-    int amount = 0;
+    float amount = 0;
     int pin = size;
 
     for (int i = size - 1; i >= 0; i++)
@@ -147,17 +147,10 @@ int CpuVitor::convertDigitsToInt(Digit *digits, char size)
     return amount;
 }
 
-Digit CpuVitor::intToDigit(int num)
+Digit CpuVitor::convertFloatToDigits(int num)
 {
 
     int temp;
-    char *toChar;
-    intToChar(toChar, num);
-
-    for (int i = 0; i < MAX_DIGITS; i++)
-    {
-        temp = num;
-    }
 
     switch (temp)
     {
@@ -296,4 +289,8 @@ void CpuVitor::intToChar(char *memo, int num)
 
         temp = temp / 10;
     }
+}
+
+Digit CpuVitor::intToDigit(int num)
+{
 }
