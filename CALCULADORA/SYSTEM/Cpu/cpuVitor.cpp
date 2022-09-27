@@ -1,5 +1,5 @@
 #include <iostream>
-#include "CpuVitor.hpp"
+#include "cpuVitor.hpp"
 
 CpuVitor::CpuVitor()
 {
