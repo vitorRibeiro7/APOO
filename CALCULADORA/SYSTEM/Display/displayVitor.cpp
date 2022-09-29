@@ -108,3 +108,8 @@ void DisplayVitor::clear()
         }
     }
 }
+
+void DisplayVitor::setDecimalSeparator()
+{
+    this->showDigitShape("........", "........", ".....##.", ".....##.", "........", 0);
+}

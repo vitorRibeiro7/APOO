@@ -11,6 +11,7 @@ private:
     Digit digitsOperand2[MAX_DIGITS];
     int digitsOperand1Count = 0;
     int digitsOperand2Count = 0;
+    int resultCount = 0;
     Operation operation = NOOP;
 
     // FUNÇÕES AUXILIARES
@@ -18,12 +19,18 @@ private:
     float convertDigitsToFloat(Digit *digits, int size);
     char floatToChar(float operation);
     float charToFloat(char *operation);
+    void convertResultToDigit(float num, int size);
 
     // MEMORIA
     float memo;
     float memo1;
     float memo2;
     char memochar[MAX_DIGITS];
+
+    Signal signal;
+
+    // BOOL
+    bool decimal_separator;
 
 public:
     CpuVitor();

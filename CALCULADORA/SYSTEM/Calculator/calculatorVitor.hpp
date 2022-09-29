@@ -43,6 +43,7 @@ class Display
 {
 public:
     virtual void addDigit(Digit, bool withDot = false) = 0;
+    virtual void setDecimalSeparator() = 0;
     virtual void setSignal(Signal) = 0;
     virtual void clear() = 0;
 };

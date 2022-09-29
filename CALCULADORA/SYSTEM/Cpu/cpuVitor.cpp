@@ -10,6 +10,8 @@ CpuVitor::CpuVitor()
     int memo = 0;
     int memo1 = 0;
     int memo2 = 0;
+
+    bool decimal_separator = false;
 }
 
 void CpuVitor::receiveDigit(Digit digit)
@@ -33,6 +35,18 @@ void CpuVitor::receiveDigit(Digit digit)
 
 void CpuVitor::receiveOperation(Operation op)
 {
+
+    if (op == SUBTRACTION && this->operation == NOOP)
+    {
+        this->display ? this->display->setSignal(NEGATIVE) : void();
+    }
+
+    if (op == SUBTRACTION && this->operation != NOOP)
+    {
+        this->display ? this->display->setSignal(NEGATIVE) : void();
+        this->operation = NOOP;
+    }
+
     // Guardo a operação, mas antes verificar se já existe uma definida e já exisite um operand2
     if ((this->operation != NOOP) && (this->digitsOperand1Count > 0))
     {
@@ -86,7 +100,7 @@ void CpuVitor::operate()
     }
 
     floatToChar(this->memo);
-    
+    convertResultToDigit(this->memo, MAX_DIGITS);
 }
 
 float CpuVitor::convertDigitsToFloat(Digit *digits, int size)
@@ -154,5 +168,63 @@ float CpuVitor::charToFloat(char *operation)
 {
     float num;
     num = atof(operation);
+    if (this->signal == NEGATIVE)
+    {
+        num = num * -1;
+        this->signal = POSITIVE;
+    }
     return num;
+}
+
+void CpuVitor::convertResultToDigit(float num, int size)
+{
+    this->floatToChar(num);
+
+    if (num < 0)
+    {
+        this->display ? this->display->setSignal(NEGATIVE) : void();
+    }
+    char result[100];
+    std::sprintf(result, "%g", num);
+
+    for (int i = 0; i < size; i++)
+    {
+        switch (result[i])
+        {
+        case '0':
+            this->display ? this->display->addDigit(ZERO) : void();
+            break;
+        case '1':
+            this->display ? this->display->addDigit(ONE) : void();
+            break;
+        case '2':
+            this->display ? this->display->addDigit(TWO) : void();
+            break;
+        case '3':
+            this->display ? this->display->addDigit(THREE) : void();
+            break;
+        case '4':
+            this->display ? this->display->addDigit(FOUR) : void();
+            break;
+        case '5':
+            this->display ? this->display->addDigit(FIVE) : void();
+            break;
+        case '6':
+            this->display ? this->display->addDigit(SIX) : void();
+            break;
+        case '7':
+            this->display ? this->display->addDigit(SEVEN) : void();
+            break;
+        case '8':
+            this->display ? this->display->addDigit(EIGHT) : void();
+            break;
+        case '9':
+            this->display ? this->display->addDigit(NINE) : void();
+            break;
+        case '.':
+            this->decimal_separator = false;
+            this->display ? this->display->setDecimalSeparator() : void();
+            break;
+        }
+    }
 }
