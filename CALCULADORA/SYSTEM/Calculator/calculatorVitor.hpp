@@ -61,7 +61,10 @@ class Key;
 class Keyboard
 {
 public:
-    virtual void receiveDigit(int) = 0;
+    virtual void receiveDigit(Digit) = 0;
+    virtual void receiveOperation(Operation) = 0;
+    virtual void receiveControl(Control) = 0;
+    virtual void addKey(Key) = 0;
     virtual Key findKey(char) = 0;
     virtual void setCpu(Cpu &) = 0;
 };
@@ -71,13 +74,5 @@ class Key
 public:
     virtual void press();
     virtual void setKeyboard(Keyboard &);
-};
-
-class Controle
-{
-private:
-    /* data */
-public:
-    Controle(/* args */);
-    ~Controle();
+    virtual void getChar() = 0;
 };
