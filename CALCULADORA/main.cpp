@@ -24,7 +24,7 @@ void testDisplay(DisplayVitor &display)
 void testCpu(CpuVitor &cpu)
 {
   std::cout << "Testing CPU...\n";
-  cpu.receiveControl(ON_CLEAR_ERROR);
+  // cpu.receiveControl(ON_CLEAR_ERROR);
   cpu.receiveDigit(ONE);
   cpu.receiveDigit(TWO);
   cpu.receiveDigit(THREE);

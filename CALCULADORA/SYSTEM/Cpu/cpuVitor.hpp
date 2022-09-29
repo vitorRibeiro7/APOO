@@ -5,23 +5,19 @@
 class CpuVitor : public Cpu
 {
 private:
+    // VARIAVEIS DE SISTEMA
     Display *display;
     Digit digitsOperand1[MAX_DIGITS];
     Digit digitsOperand2[MAX_DIGITS];
-    char digitsOperand1Count = 0;
-    char digitsOperand2Count = 0;
+    int digitsOperand1Count = 0;
+    int digitsOperand2Count = 0;
     Operation operation = NOOP;
 
+    // FUNÇÕES AUXILIARES
     void operate();
-    Digit intToDigit(int num);
-    void intToChar(char *memo, int num);
-    float convertDigitsToFloat(Digit *digits, char size);
-    Digit convertFloatToDigits(int num);
-    char digitsToChar(Digit);
+    float convertDigitsToFloat(Digit *digits, int size);
 
-    void resetDigits(Digit *digits);
-    void insertDigitsOnDisplay(Digit *digits);
-
+    // MEMORIA
     float memo;
     float memo1;
     float memo2;

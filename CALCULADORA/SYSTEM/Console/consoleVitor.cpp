@@ -49,9 +49,7 @@ void Console::clear_screen()
     cout << "\033[2J";
 }
 
-/*
-void Console::set_color_rgb(int r, int g, int b)
-{
-    cout << "\033[38;2;" << r << ';' << g << ';' << b << "m";
-}
-*/
+// void Console::set_color_rgb(int r, int g, int b)
+// {
+//     cout << "\033[38;2;" << r << ';' << g << ';' << b << "m";
+// }

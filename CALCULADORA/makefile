@@ -4,3 +4,8 @@ all:
 	g++ -c ./SYSTEM/Cpu/cpuVitor.cpp -o cpuVitor.o
 	g++ main.cpp consoleVitor.o displayVitor.o cpuVitor.o -o main
 	./main
+
+del:
+	rm *.o
+	rm main
+	rm main.exe

@@ -65,6 +65,9 @@ void CpuVitor::operate()
     this->memo1 = convertDigitsToFloat(this->digitsOperand1, this->digitsOperand1Count);
     this->memo2 = convertDigitsToFloat(this->digitsOperand2, this->digitsOperand2Count);
 
+    printf("%i", this->memo1);
+    printf("%i", this->memo2);
+
     switch (this->operation)
     {
     case EQUAL:
@@ -85,14 +88,9 @@ void CpuVitor::operate()
         break;
     }
 
-    resetDigits(this->digitsOperand2);
-    this->digitsOperand2Count = 0;
-
-    convertFloatToDigits(this->memo1);
-    insertDigitsOnDisplay(this->digitsOperand1);
 }
 
-float CpuVitor::convertDigitsToFloat(Digit *digits, char size)
+float CpuVitor::convertDigitsToFloat(Digit *digits, int size)
 {
 
     float amount = 0;
@@ -145,152 +143,4 @@ float CpuVitor::convertDigitsToFloat(Digit *digits, char size)
     }
 
     return amount;
-}
-
-Digit CpuVitor::convertFloatToDigits(int num)
-{
-
-    int temp;
-
-    switch (temp)
-    {
-    case 0:
-        return ZERO;
-        break;
-    case 1:
-        return ONE;
-        break;
-    case 2:
-        return TWO;
-        break;
-    case 3:
-        return THREE;
-        break;
-    case 4:
-        return FOUR;
-        break;
-    case 5:
-        return FIVE;
-        break;
-    case 6:
-        return SIX;
-        break;
-    case 7:
-        return SEVEN;
-        break;
-    case 8:
-        return EIGHT;
-        break;
-    case 9:
-        return NINE;
-        break;
-    default:
-        break;
-    }
-}
-
-void CpuVitor::resetDigits(Digit *digits)
-{
-    for (int i = 0; i < MAX_DIGITS; i++)
-    {
-        digits[i] == ZERO;
-    }
-}
-
-void CpuVitor::insertDigitsOnDisplay(Digit *digits)
-{
-    for (int i = 0; i < MAX_DIGITS; i++)
-    {
-
-        Digit temp = intToDigit(this->memo);
-
-        switch (temp)
-        {
-        case ZERO:
-            this->display->addDigit(ZERO);
-            break;
-        case ONE:
-            this->display->addDigit(ONE);
-            break;
-        case TWO:
-            this->display->addDigit(TWO);
-            break;
-        case THREE:
-            this->display->addDigit(THREE);
-            break;
-        case FOUR:
-            this->display->addDigit(FOUR);
-            break;
-        case FIVE:
-            this->display->addDigit(FIVE);
-            break;
-        case SIX:
-            this->display->addDigit(SIX);
-            break;
-        case SEVEN:
-            this->display->addDigit(SEVEN);
-            break;
-        case EIGHT:
-            this->display->addDigit(EIGHT);
-            break;
-        case NINE:
-            this->display->addDigit(NINE);
-            break;
-        default:
-            break;
-        }
-    }
-}
-
-void CpuVitor::intToChar(char *memo, int num)
-{
-
-    int temp;
-
-    for (int i = MAX_DIGITS - 1; i <= 0; i++)
-    {
-        temp = num % 10;
-
-        switch (temp)
-        {
-        case 0:
-            memo[i] = '0';
-            break;
-        case 1:
-            memo[i] = '1';
-            break;
-        case 2:
-            memo[i] = '2';
-            break;
-        case 3:
-            memo[i] = '3';
-            break;
-        case 4:
-            memo[i] = '4';
-            break;
-        case 5:
-            memo[i] = '5';
-            break;
-        case 6:
-            memo[i] = '6';
-            break;
-        case 7:
-            memo[i] = '7';
-            break;
-        case 8:
-            memo[i] = '8';
-            break;
-        case 9:
-            memo[i] = '9';
-            break;
-        default:
-            break;
-        }
-
-        temp = temp / 10;
-    }
-}
-
-Digit CpuVitor::intToDigit(int num)
-{
 }
