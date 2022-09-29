@@ -3,6 +3,8 @@
 #include "SYSTEM/Calculator/calculatorVitor.hpp"
 #include "SYSTEM/Cpu/cpuVitor.hpp"
 #include "SYSTEM/Display/displayVitor.hpp"
+#include "SYSTEM/Keyboard/keyboardVitor.hpp"
+#include "SYSTEM/Key/keyVitor.hpp"
 
 void testDisplay(DisplayVitor &display)
 {
@@ -32,8 +34,27 @@ void testCpu(CpuVitor &cpu)
   cpu.receiveOperation(SUBTRACTION);
   cpu.receiveDigit(FOUR);
   cpu.receiveDigit(FIVE);
-  cpu.receiveDigit(SIX);
+  cpu.receiveDigit(EIGHT);
   cpu.receiveOperation(EQUAL);
+  cpu.receiveOperation(EQUAL);
+  cpu.receiveOperation(EQUAL);
+  cpu.receiveOperation(EQUAL);
+  cpu.receiveOperation(EQUAL);
+}
+
+void testKeyboard(Keyboard &keyboard)
+{
+  try
+  {
+    keyboard.findKey('1').press();
+    keyboard.findKey('+').press();
+    keyboard.findKey('1').press();
+    keyboard.findKey('=').press();
+  }
+  catch (const char *exception)
+  {
+    std::cerr << exception;
+  }
 }
 
 int main()
@@ -42,11 +63,28 @@ int main()
   /* Instancie suas implementações aqui */
   DisplayVitor d1;
   CpuVitor c1;
+  KeyboardVitor kb1;
+
+  KeyVitor keyOne('1', ONE);
+  KeyVitor keyTwo('2', TWO);
+  KeyVitor keyThree('3', THREE);
+
+  KeyVitor keyAddition('+', ADDITION);
+  KeyVitor keyEqual('=', EQUAL);
 
   /* Fase de construção/ligação */
   c1.setDisplay(d1);
+  kb1.setCpu(c1);
+
+  kb1.addKey(keyOne);
+  kb1.addKey(keyTwo);
+  kb1.addKey(keyThree);
+
+  kb1.addKey(keyAddition);
+  kb1.addKey(keyEqual);
 
   /* Fase de testes */
   // testDisplay(d1);
-  testCpu(c1);
+  // testCpu(c1);
+  testKeyboard(kb1);
 }

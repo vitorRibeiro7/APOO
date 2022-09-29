@@ -15,6 +15,7 @@ void KeyboardVitor::receiveControl(Control control)
 void KeyboardVitor::addKey(Key &key)
 {
     this->keys[this->keysCount++] = &key;
+    key.setKeyboard(*this);
 }
 
 Key &KeyboardVitor::findKey(char symbol)
