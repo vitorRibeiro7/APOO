@@ -16,11 +16,14 @@ private:
     // FUNÇÕES AUXILIARES
     void operate();
     float convertDigitsToFloat(Digit *digits, int size);
+    char floatToChar(float operation);
+    float charToFloat(char *operation);
 
     // MEMORIA
     float memo;
     float memo1;
     float memo2;
+    char memochar[MAX_DIGITS];
 
 public:
     CpuVitor();

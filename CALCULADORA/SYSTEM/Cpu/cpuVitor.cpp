@@ -65,9 +65,6 @@ void CpuVitor::operate()
     this->memo1 = convertDigitsToFloat(this->digitsOperand1, this->digitsOperand1Count);
     this->memo2 = convertDigitsToFloat(this->digitsOperand2, this->digitsOperand2Count);
 
-    printf("%i", this->memo1);
-    printf("%i", this->memo2);
-
     switch (this->operation)
     {
     case EQUAL:
@@ -88,19 +85,21 @@ void CpuVitor::operate()
         break;
     }
 
+    floatToChar(this->memo);
+    
 }
 
 float CpuVitor::convertDigitsToFloat(Digit *digits, int size)
 {
 
     float amount = 0;
-    int pin = size;
+    int pin = 1;
+    int temp = 0;
 
-    for (int i = size - 1; i >= 0; i++)
+    for (int i = size - 1; i >= 0; i--)
     {
 
-        int temp = 0;
-        pin *= 10;
+        temp = 0;
 
         switch (digits[i])
         {
@@ -139,8 +138,21 @@ float CpuVitor::convertDigitsToFloat(Digit *digits, int size)
         }
 
         temp = temp * pin;
+        pin *= 10;
         amount += temp;
     }
 
     return amount;
+}
+
+char CpuVitor::floatToChar(float num)
+{
+    std::sprintf(this->memochar, "%.3f", num);
+}
+
+float CpuVitor::charToFloat(char *operation)
+{
+    float num;
+    num = atof(operation);
+    return num;
 }
