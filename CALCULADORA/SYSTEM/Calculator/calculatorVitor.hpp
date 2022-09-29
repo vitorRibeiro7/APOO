@@ -64,15 +64,15 @@ public:
     virtual void receiveDigit(Digit) = 0;
     virtual void receiveOperation(Operation) = 0;
     virtual void receiveControl(Control) = 0;
-    virtual void addKey(Key) = 0;
-    virtual Key findKey(char) = 0;
+    virtual void addKey(Key &key) = 0;
+    virtual Key &findKey(char) = 0;
     virtual void setCpu(Cpu &) = 0;
 };
 
 class Key
 {
 public:
-    virtual void press();
-    virtual void setKeyboard(Keyboard &);
-    virtual void getChar() = 0;
+    virtual void press() = 0;
+    virtual void setKeyboard(Keyboard &) = 0;
+    virtual char getSymbol() = 0;
 };
