@@ -1,3 +1,4 @@
+#pragma once
 #include "keyVitor.hpp"
 
 KeyVitor::KeyVitor(char symbol, Digit digit)
@@ -29,6 +30,12 @@ void KeyVitor::press()
         this->keyboard->receiveControl(this->control);
 }
 
-void KeyVitor::setKeyboard(Keyboard &keyboard) { this->keyboard = &keyboard; }
+void KeyVitor::setKeyboard(Keyboard &keyboard)
+{
+    this->keyboard = &keyboard;
+}
 
-char KeyVitor::getSymbol() { return this->symbol; }
+char KeyVitor::getSymbol()
+{
+    return this->symbol;
+}

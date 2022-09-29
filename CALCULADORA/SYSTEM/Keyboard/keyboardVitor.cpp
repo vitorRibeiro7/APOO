@@ -17,7 +17,7 @@ void KeyboardVitor::addKey(Key &key)
     this->keys[this->keysCount++] = &key;
 }
 
-Key KeyboardVitor::findKey(char symbol)
+Key &KeyboardVitor::findKey(char symbol)
 {
     for (int i = 0; i < this->keysCount; i++)
     {
