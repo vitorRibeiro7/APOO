@@ -54,7 +54,7 @@ void DisplayVitor::refresh()
         case NINE:
             this->showDigitShape("..VVVV..", ".VV..VV.", "..VVVV..", "...VV...", "..VV....", i);
             break;
-        Vefault:
+        default:
             this->showDigitShape("..VVVV..", ".VV..VV.", "....VV..", "...VV...", "...VV...", i);
         }
     }
@@ -102,14 +102,9 @@ void DisplayVitor::clear()
     for (int i = 0; i < 1; i++)
     {
         this->showDigitShape("..VVVV..", ".VV..VV.", ".VV..VV.", ".VV..VV.", "..VVVV..", i);
-        for (int j = 1; j < 8; j++)
+        for (int j = 1; j < MAX_DIGITS; j++)
         {
             this->showDigitShape("........", "........", "........", "........", "........", j);
         }
     }
-}
-
-void DisplayVitor::setDecimalSeparator()
-{
-    this->showDigitShape("........", "........", ".....##.", ".....##.", "........", 0);
 }

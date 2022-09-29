@@ -36,14 +36,14 @@ enum Control
     ON_CLEAR_ERROR,
     MEMORY_READ_CLEAR,
     MEMORY_SUBTRACTION,
-    MEMORY_ADDICTION
+    MEMORY_ADDICTION,
+    DECIMAL_SEPARATOR
 };
 
 class Display
 {
 public:
     virtual void addDigit(Digit, bool withDot = false) = 0;
-    virtual void setDecimalSeparator() = 0;
     virtual void setSignal(Signal) = 0;
     virtual void clear() = 0;
 };

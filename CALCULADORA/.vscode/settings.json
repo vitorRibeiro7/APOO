@@ -1,8 +1,5 @@
 {
     "yaml.customTags": [
         "!script"
-    ],
-    "files.associations": {
-        "iostream": "cpp"
-    }
+    ]
 }

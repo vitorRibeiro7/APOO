@@ -20,8 +20,10 @@ private:
     char floatToChar(float operation);
     float charToFloat(char *operation);
     void convertResultToDigit(float num, int size);
+    int countChar(char *str);
 
     // MEMORIA
+    int memoCount;
     float memo;
     float memo1;
     float memo2;

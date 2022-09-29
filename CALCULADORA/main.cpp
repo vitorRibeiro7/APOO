@@ -24,15 +24,15 @@ void testDisplay(DisplayVitor &display)
 void testCpu(CpuVitor &cpu)
 {
   std::cout << "Testing CPU...\n";
-  // cpu.receiveControl(ON_CLEAR_ERROR);
+  cpu.receiveControl(ON_CLEAR_ERROR);
   cpu.receiveDigit(ONE);
   cpu.receiveDigit(TWO);
   cpu.receiveDigit(THREE);
   cpu.receiveOperation(ADDITION);
+  cpu.receiveOperation(SUBTRACTION);
   cpu.receiveDigit(FOUR);
   cpu.receiveDigit(FIVE);
   cpu.receiveDigit(SIX);
-  cpu.receiveOperation(ADDITION);
   cpu.receiveOperation(EQUAL);
 }
 

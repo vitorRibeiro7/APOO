@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 #include "cpuVitor.hpp"
 
 CpuVitor::CpuVitor()
@@ -17,7 +18,7 @@ CpuVitor::CpuVitor()
 void CpuVitor::receiveDigit(Digit digit)
 {
 
-    // this->digitsOperand1Count == 0 && this->operation == NOOP ? this->display->clear() : void();
+    this->digitsOperand1Count == 0 && this->operation == NOOP ? this->display->clear() : void();
 
     // Guardo o dígito no operanto correspondente
     if (this->operation == NOOP)
@@ -30,25 +31,27 @@ void CpuVitor::receiveDigit(Digit digit)
     }
 
     // Envio o dígito para o Display
-    this->display->addDigit(digit);
+    this->display->addDigit(digit, this->decimal_separator);
+
+    this->decimal_separator == true ? this->decimal_separator = false : this->decimal_separator = true;
 }
 
 void CpuVitor::receiveOperation(Operation op)
 {
 
-    if (op == SUBTRACTION && this->operation == NOOP)
-    {
-        this->display ? this->display->setSignal(NEGATIVE) : void();
-    }
+    // if (op == SUBTRACTION && this->operation == NOOP)
+    // {
+    //     this->display ? this->display->setSignal(NEGATIVE) : void();
+    // }
 
-    if (op == SUBTRACTION && this->operation != NOOP)
-    {
-        this->display ? this->display->setSignal(NEGATIVE) : void();
-        this->operation = NOOP;
-    }
+    // if (op == SUBTRACTION && this->operation != NOOP)
+    // {
+    //     this->display ? this->display->setSignal(NEGATIVE) : void();
+    //     this->operation = NOOP;
+    // }
 
     // Guardo a operação, mas antes verificar se já existe uma definida e já exisite um operand2
-    if ((this->operation != NOOP) && (this->digitsOperand1Count > 0))
+    if ((this->operation != NOOP) && (this->digitsOperand2Count > 0))
     {
         this->operate();
     }
@@ -100,7 +103,8 @@ void CpuVitor::operate()
     }
 
     floatToChar(this->memo);
-    convertResultToDigit(this->memo, MAX_DIGITS);
+    this->memoCount = countChar(this->memochar);
+    convertResultToDigit(this->memo, this->memoCount);
 }
 
 float CpuVitor::convertDigitsToFloat(Digit *digits, int size)
@@ -147,6 +151,9 @@ float CpuVitor::convertDigitsToFloat(Digit *digits, int size)
         case NINE:
             temp = 9;
             break;
+        // case DECIMAL_SEPARATOR:
+        // FAZER O NUMERO TER O PONTO
+        // break;
         default:
             break;
         }
@@ -161,7 +168,7 @@ float CpuVitor::convertDigitsToFloat(Digit *digits, int size)
 
 char CpuVitor::floatToChar(float num)
 {
-    std::sprintf(this->memochar, "%.3f", num);
+    std::sprintf(this->memochar, "%.0f", num);
 }
 
 float CpuVitor::charToFloat(char *operation)
@@ -184,47 +191,66 @@ void CpuVitor::convertResultToDigit(float num, int size)
     {
         this->display ? this->display->setSignal(NEGATIVE) : void();
     }
+
     char result[100];
-    std::sprintf(result, "%g", num);
+
+    std::sprintf(result, "%.0f", num);
+
+    this->digitsOperand1Count = 0;
+    this->digitsOperand2Count = 0;
+    this->operation = NOOP;
 
     for (int i = 0; i < size; i++)
     {
         switch (result[i])
         {
         case '0':
-            this->display ? this->display->addDigit(ZERO) : void();
+            this->receiveDigit(ZERO);
             break;
         case '1':
-            this->display ? this->display->addDigit(ONE) : void();
+            this->receiveDigit(ONE);
             break;
         case '2':
-            this->display ? this->display->addDigit(TWO) : void();
+            this->receiveDigit(TWO);
             break;
         case '3':
-            this->display ? this->display->addDigit(THREE) : void();
+            this->receiveDigit(THREE);
             break;
         case '4':
-            this->display ? this->display->addDigit(FOUR) : void();
+            this->receiveDigit(FOUR);
             break;
         case '5':
-            this->display ? this->display->addDigit(FIVE) : void();
+            this->receiveDigit(FIVE);
             break;
         case '6':
-            this->display ? this->display->addDigit(SIX) : void();
+            this->receiveDigit(SIX);
             break;
         case '7':
-            this->display ? this->display->addDigit(SEVEN) : void();
+            this->receiveDigit(SEVEN);
             break;
         case '8':
-            this->display ? this->display->addDigit(EIGHT) : void();
+            this->receiveDigit(EIGHT);
             break;
         case '9':
-            this->display ? this->display->addDigit(NINE) : void();
+            this->receiveDigit(NINE);
             break;
         case '.':
-            this->decimal_separator = false;
-            this->display ? this->display->setDecimalSeparator() : void();
+            this->decimal_separator = true;
             break;
         }
     }
+}
+
+int CpuVitor::countChar(char *str)
+{
+    int count = 0;
+    int i = 0;
+
+    while (str[i] != '\0')
+    {
+        count++;
+        i++;
+    }
+
+    return count;
 }
