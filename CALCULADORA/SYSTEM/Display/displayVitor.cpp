@@ -87,6 +87,8 @@ void DisplayVitor::addDigit(Digit digit, bool withDot)
         digits[this->digitsCount++] = digit;
         this->refresh();
     }
+
+    printf(withDot ? "HUASHUAHSUAHSA" : " ");
 }
 
 void DisplayVitor::setSignal(Signal signal)

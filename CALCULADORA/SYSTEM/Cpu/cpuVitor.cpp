@@ -32,24 +32,10 @@ void CpuVitor::receiveDigit(Digit digit)
 
     // Envio o dígito para o Display
     this->display->addDigit(digit, this->decimal_separator);
-
-    this->decimal_separator == true ? this->decimal_separator = false : this->decimal_separator = true;
 }
 
 void CpuVitor::receiveOperation(Operation op)
 {
-
-    // if (op == SUBTRACTION && this->operation == NOOP)
-    // {
-    //     this->display ? this->display->setSignal(NEGATIVE) : void();
-    // }
-
-    // if (op == SUBTRACTION && this->operation != NOOP)
-    // {
-    //     this->display ? this->display->setSignal(NEGATIVE) : void();
-    //     this->operation = NOOP;
-    // }
-
     // Guardo a operação, mas antes verificar se já existe uma definida e já exisite um operand2
     if ((this->operation != NOOP) && (this->digitsOperand2Count > 0))
     {
@@ -206,33 +192,73 @@ void CpuVitor::convertResultToDigit(float num, int size)
         {
         case '0':
             this->receiveDigit(ZERO);
+            if (result[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '1':
             this->receiveDigit(ONE);
+            if (result[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '2':
             this->receiveDigit(TWO);
+            if (result[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '3':
             this->receiveDigit(THREE);
+            if (result[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '4':
             this->receiveDigit(FOUR);
+            if (result[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '5':
             this->receiveDigit(FIVE);
+            if (result[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '6':
             this->receiveDigit(SIX);
+            if (result[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '7':
             this->receiveDigit(SEVEN);
+            if (result[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '8':
             this->receiveDigit(EIGHT);
+            if (result[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '9':
             this->receiveDigit(NINE);
+            if (result[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '.':
             this->decimal_separator = true;
