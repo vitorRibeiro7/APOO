@@ -85,6 +85,6 @@ int main()
 
   /* Fase de testes */
   // testDisplay(d1);
-  // testCpu(c1);
-  testKeyboard(kb1);
+  testCpu(c1);
+  // testKeyboard(kb1);
 }
