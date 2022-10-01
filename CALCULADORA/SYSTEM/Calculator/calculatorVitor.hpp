@@ -26,7 +26,6 @@ enum Operation
     SUBTRACTION,
     MULTIPLICATION,
     DIVISION,
-    EQUAL,
     NOOP
 };
 
@@ -37,7 +36,8 @@ enum Control
     MEMORY_READ_CLEAR,
     MEMORY_SUBTRACTION,
     MEMORY_ADDICTION,
-    DECIMAL_SEPARATOR
+    DECIMAL_SEPARATOR,
+    EQUAL
 };
 
 class Display

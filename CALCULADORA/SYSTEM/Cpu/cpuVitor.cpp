@@ -53,6 +53,17 @@ void CpuVitor::receiveControl(Control control)
         this->display->clear();
         break;
     case EQUAL:
+        this->operate();
+        break;
+    case OFF:
+        break;
+    case MEMORY_READ_CLEAR:
+        break;
+    case MEMORY_SUBTRACTION:
+        break;
+    case MEMORY_ADDICTION:
+        break;
+    case DECIMAL_SEPARATOR:
         break;
     }
 }

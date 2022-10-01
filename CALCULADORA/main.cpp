@@ -34,7 +34,7 @@ void testCpu(CpuVitor &cpu)
   cpu.receiveDigit(ONE);
   cpu.receiveControl(DECIMAL_SEPARATOR);
   cpu.receiveDigit(TWO);
-  cpu.receiveOperation(EQUAL);
+  cpu.receiveControl(EQUAL);
 }
 
 void testKeyboard(Keyboard &keyboard)
