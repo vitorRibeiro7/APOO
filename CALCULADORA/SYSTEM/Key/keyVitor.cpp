@@ -1,4 +1,3 @@
-#pragma once
 #include "keyVitor.hpp"
 
 KeyVitor::KeyVitor(char symbol, Digit digit)

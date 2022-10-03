@@ -4,15 +4,18 @@
 
 CpuVitor::CpuVitor()
 {
-    char digitsOperand1Count = 0;
-    char digitsOperand2Count = 0;
-    Operation operation = NOOP;
+    this->digitsOperand1Count = 0;
+    this->digitsOperand2Count = 0;
 
-    int memo = 0;
-    int memo1 = 0;
-    int memo2 = 0;
+    this->dotControlFirstOp = 0;
+    this->dotControlSecondOp = 0;
 
-    bool decimal_separator = false;
+    this->memo = 0;
+    this->memo1 = 0;
+    this->memo2 = 0;
+    this->memory = 0;
+
+    this->decimal_separator = false;
 }
 
 void CpuVitor::receiveDigit(Digit digit)
@@ -51,6 +54,21 @@ void CpuVitor::receiveControl(Control control)
     {
     case ON_CLEAR_ERROR:
         this->display->clear();
+        this->memo = 0;
+        this->memo1 = 0;
+        this->memo2 = 0;
+        this->memory = 0;
+
+        this->operation == NOOP;
+        this->display ? this->display->clear() : void();
+        this->display ? this->display->addDigit(ZERO) : void();
+
+        this->decimal_separator == false;
+
+        this->digitsOperand1Count = 0;
+        this->digitsOperand2Count = 0;
+        this->resultCount = 0;
+
         break;
     case EQUAL:
         this->operate();
@@ -58,12 +76,32 @@ void CpuVitor::receiveControl(Control control)
     case OFF:
         break;
     case MEMORY_READ_CLEAR:
+        this->memo = 0;
+        this->memo1 = 0;
+        this->memo2 = 0;
+        this->memory = 0;
         break;
     case MEMORY_SUBTRACTION:
         break;
     case MEMORY_ADDICTION:
         break;
     case DECIMAL_SEPARATOR:
+        if (this->operation == NOOP)
+        {
+            if (this->dotOne == false)
+            {
+                this->dotOne = true;
+                this->dotControlFirstOp = this->digitsOperand1Count;
+            }
+        }
+        else
+        {
+            if (this->dotSec == false)
+            {
+                this->dotSec = true;
+                this->dotControlSecondOp = this->digitsOperand2Count;
+            }
+        }
         break;
     }
 }
@@ -98,10 +136,73 @@ void CpuVitor::operate()
     default:
         break;
     }
-
     floatToChar(this->memo);
     this->memoCount = countChar(this->memochar);
     convertResultToDigit(this->memo, this->memoCount);
+}
+
+float CpuVitor::charToFloat(char str)
+{
+    char vIn = str;
+    float vOut = (float)vIn;
+
+    return vOut;
+}
+
+void CpuVitor::digitsToChar(Digit *digit, char *vet, int size, bool dot, int pos)
+{
+
+    if (dot == true)
+    {
+        size = size + 1;
+    }
+
+    for (int i = 0; i < size; i++)
+    {
+
+        if (dot == true && i == pos)
+        {
+            vet[i] = '.';
+            i++;
+        }
+
+        switch (digit[i])
+        {
+        case ZERO:
+            vet[i] = '0';
+            break;
+        case ONE:
+            vet[i] = '1';
+            break;
+        case TWO:
+            vet[i] = '2';
+            break;
+        case THREE:
+            vet[i] = '3';
+            break;
+        case FOUR:
+            vet[i] = '4';
+            break;
+        case FIVE:
+            vet[i] = '5';
+            break;
+        case SIX:
+            vet[i] = '6';
+            break;
+        case SEVEN:
+            vet[i] = '7';
+            break;
+        case EIGHT:
+            vet[i] = '8';
+            break;
+        case NINE:
+            vet[i] = '9';
+            break;
+        default:
+            vet[i] = '?';
+            break;
+        }
+    }
 }
 
 float CpuVitor::convertDigitsToFloat(Digit *digits, int size)
@@ -148,9 +249,6 @@ float CpuVitor::convertDigitsToFloat(Digit *digits, int size)
         case NINE:
             temp = 9;
             break;
-        // case DECIMAL_SEPARATOR:
-        // FAZER O NUMERO TER O PONTO
-        // break;
         default:
             break;
         }
@@ -163,9 +261,9 @@ float CpuVitor::convertDigitsToFloat(Digit *digits, int size)
     return amount;
 }
 
-char CpuVitor::floatToChar(float num)
+void CpuVitor::floatToChar(float num)
 {
-    std::sprintf(this->memochar, "%.0f", num);
+    std::sprintf(this->memochar, "%.1f", num);
 }
 
 float CpuVitor::charToFloat(char *operation)
@@ -191,7 +289,7 @@ void CpuVitor::convertResultToDigit(float num, int size)
 
     char result[100];
 
-    std::sprintf(result, "%.0f", num);
+    std::sprintf(result, "%.2f", num);
 
     this->digitsOperand1Count = 0;
     this->digitsOperand2Count = 0;
@@ -203,76 +301,33 @@ void CpuVitor::convertResultToDigit(float num, int size)
         {
         case '0':
             this->receiveDigit(ZERO);
-            if (result[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
             break;
         case '1':
             this->receiveDigit(ONE);
-            if (result[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
             break;
         case '2':
             this->receiveDigit(TWO);
-            if (result[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
             break;
         case '3':
             this->receiveDigit(THREE);
-            if (result[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
             break;
         case '4':
             this->receiveDigit(FOUR);
-            if (result[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
             break;
         case '5':
             this->receiveDigit(FIVE);
-            if (result[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
             break;
         case '6':
             this->receiveDigit(SIX);
-            if (result[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
             break;
         case '7':
             this->receiveDigit(SEVEN);
-            if (result[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
             break;
         case '8':
             this->receiveDigit(EIGHT);
-            if (result[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
             break;
         case '9':
             this->receiveDigit(NINE);
-            if (result[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
-            break;
-        case '.':
-            this->decimal_separator = true;
             break;
         }
     }

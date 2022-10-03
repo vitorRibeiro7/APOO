@@ -5,7 +5,7 @@ using namespace std;
 
 void Console::init(int start_row, int start_col)
 {
-    clear_screen();
+    // clear_screen();
     set_cursor(start_row, start_col);
 }
 
