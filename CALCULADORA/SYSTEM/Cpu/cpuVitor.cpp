@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdio>
+#include <stdlib.h>
 #include "cpuVitor.hpp"
 
 CpuVitor::CpuVitor()
@@ -33,8 +34,12 @@ void CpuVitor::receiveDigit(Digit digit)
         this->digitsOperand2[this->digitsOperand2Count++] = digit;
     }
 
+    _sleep(500);
+
     // Envio o dígito para o Display
     this->display->addDigit(digit, this->decimal_separator);
+
+    _sleep(500);
 }
 
 void CpuVitor::receiveOperation(Operation op)
@@ -263,7 +268,7 @@ float CpuVitor::convertDigitsToFloat(Digit *digits, int size)
 
 void CpuVitor::floatToChar(float num)
 {
-    std::sprintf(this->memochar, "%.1f", num);
+    std::sprintf(this->memochar, "%.0f", num);
 }
 
 float CpuVitor::charToFloat(char *operation)
@@ -301,6 +306,10 @@ void CpuVitor::convertResultToDigit(float num, int size)
         {
         case '0':
             this->receiveDigit(ZERO);
+            if (/* condition */)
+            {
+                /* code */
+            }
             break;
         case '1':
             this->receiveDigit(ONE);
