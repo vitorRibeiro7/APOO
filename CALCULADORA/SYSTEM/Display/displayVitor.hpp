@@ -22,6 +22,7 @@ private:
     int decimalSeparatorCount = 0;
 
     int decimal_position = -1;
+    bool intBlock = false;
 
 public:
     DisplayVitor();

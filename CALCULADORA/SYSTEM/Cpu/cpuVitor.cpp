@@ -166,6 +166,7 @@ void CpuVitor::operate()
     }
 
     floatToChar(this->memo, this->memochar);
+    // trataZero(this->memochar);
     this->memoCount = countChar(this->memochar);
 
     // std::cout << '\n';
@@ -178,8 +179,12 @@ void CpuVitor::operate()
 
     debug(this->digitsOperand1);
 
-    // this->display->clear();
-    // showDigit(this->digitsOperand1, &this->digitsOperand1Count, &this->dotControlFirstOp);
+    this->display->clear();
+    showDigit(this->digitsOperand1, &this->digitsOperand1Count, &this->dotControlFirstOp);
+}
+
+void CpuVitor::trataZero(char *str)
+{
 }
 
 float CpuVitor::charToFloat(char *str)
@@ -368,11 +373,11 @@ void CpuVitor::convertResultToDigit(float num, int size)
             this->digitsOperand1[this->digitsOperand1Count++] = NINE;
             break;
         case '.':
-            this->dotControlFirstOp == i;
+            this->dotControlFirstOp = i;
             break;
         }
 
-        std::cout << result[i] << '\n';
+        // std::cout << result[i] << '\n';
     }
 }
 
@@ -391,11 +396,11 @@ void CpuVitor::showDigit(Digit *memo, int *size, int *dotPos)
         }
     }
 
-    // std::cout << '\n';
-    // std::cout << *size;
-    // std::cout << '\n';
-    // std::cout << *dotPos;
-    // std::cout << '\n';
+    std::cout << '\n';
+    std::cout << *size;
+    std::cout << '\n';
+    std::cout << *dotPos;
+    std::cout << '\n';
 }
 
 void CpuVitor::debug(Digit *digit)

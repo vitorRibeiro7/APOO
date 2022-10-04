@@ -22,6 +22,7 @@ private:
     int countChar(char *str);
     void digitsToChar(char *vet, Digit *digits, int size, bool dot, int pos);
     float charToFloat(char *str);
+    void trataZero(char *str);
 
     void debug(Digit *);
 
