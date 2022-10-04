@@ -1,6 +1,7 @@
 #pragma once
 #include "../Calculator/calculatorVitor.hpp"
 #include "../Console/consoleVitor.hpp"
+#include <stdlib.h>
 
 #define MAX_DIGITS 8
 

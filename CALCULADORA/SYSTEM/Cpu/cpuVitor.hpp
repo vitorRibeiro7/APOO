@@ -17,12 +17,13 @@ private:
     // FUNÇÕES AUXILIARES
     void operate();
     float convertDigitsToFloat(Digit *digits, int size);
-    void floatToChar(float operation);
-    float charToFloat(char *operation);
+    void floatToChar(float operation, char *str);
     void convertResultToDigit(float num, int size);
     int countChar(char *str);
-    void digitsToChar(Digit *digits, char *vet, int size, bool dot, int pos);
-    float charToFloat(char str);
+    void digitsToChar(char *vet, Digit *digits, int size, bool dot, int pos);
+    float charToFloat(char *str);
+
+    void showDigit(Digit *, int *, int *);
 
     // MEMORIA
     int memoCount;

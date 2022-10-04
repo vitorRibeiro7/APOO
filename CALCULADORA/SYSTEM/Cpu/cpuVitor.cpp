@@ -34,17 +34,27 @@ void CpuVitor::receiveDigit(Digit digit)
         this->digitsOperand2[this->digitsOperand2Count++] = digit;
     }
 
-    _sleep(500);
-
     // Envio o dígito para o Display
     this->display->addDigit(digit, this->decimal_separator);
-
-    _sleep(500);
 }
 
 void CpuVitor::receiveOperation(Operation op)
 {
+
+    if (op == EQUAL)
+    {
+        this->display->clear();
+        showDigit(this->digitsOperand1, &this->digitsOperand1Count, &this->dotControlFirstOp);
+        return;
+    }
+
     // Guardo a operação, mas antes verificar se já existe uma definida e já exisite um operand2
+    if (op == EQUAL && this->digitsOperand2Count == 0)
+    {
+        operate();
+        return;
+    }
+
     if ((this->operation != NOOP) && (this->digitsOperand2Count > 0))
     {
         this->operate();
@@ -73,10 +83,6 @@ void CpuVitor::receiveControl(Control control)
         this->digitsOperand1Count = 0;
         this->digitsOperand2Count = 0;
         this->resultCount = 0;
-
-        break;
-    case EQUAL:
-        this->operate();
         break;
     case OFF:
         break;
@@ -95,16 +101,16 @@ void CpuVitor::receiveControl(Control control)
         {
             if (this->dotOne == false)
             {
-                this->dotOne = true;
                 this->dotControlFirstOp = this->digitsOperand1Count;
+                this->dotOne = true;
             }
         }
         else
         {
             if (this->dotSec == false)
             {
-                this->dotSec = true;
                 this->dotControlSecondOp = this->digitsOperand2Count;
+                this->dotSec = true;
             }
         }
         break;
@@ -122,8 +128,8 @@ void CpuVitor::operate()
     // this->memo1 = convertDigitsToFloat(this->digitsOperand1, this->digitsOperand1Count);
     // this->memo2 = convertDigitsToFloat(this->digitsOperand2, this->digitsOperand2Count);
 
-    digitsToChar(this->digitsOperand1, this->memo1Char, this->digitsOperand1Count, this->dotOne, this->dotControlFirstOp);
-    digitsToChar(this->digitsOperand2, this->memo2Char, this->digitsOperand2Count, this->dotSec, this->dotControlSecondOp);
+    digitsToChar(this->memo1Char, this->digitsOperand1, this->digitsOperand1Count, this->dotOne, this->dotControlFirstOp);
+    digitsToChar(this->memo2Char, this->digitsOperand2, this->digitsOperand2Count, this->dotSec, this->dotControlSecondOp);
 
     this->memo1 = charToFloat(this->memo1Char);
     this->memo2 = charToFloat(this->memo2Char);
@@ -148,20 +154,27 @@ void CpuVitor::operate()
         break;
     }
 
-    floatToChar(this->memo);
+    floatToChar(this->memo, this->memochar);
+
     this->memoCount = countChar(this->memochar);
     convertResultToDigit(this->memo, this->memoCount);
+
+    this->display->clear();
+    // std::cout << this->digitsOperand1;
+    // std::cout << this->digitsOperand1Count;
+    // std::cout << this->dotControlFirstOp;
+    showDigit(this->digitsOperand1, &this->digitsOperand1Count, &this->dotControlFirstOp);
 }
 
-float CpuVitor::charToFloat(char str)
+float CpuVitor::charToFloat(char *str)
 {
-    char vIn = str;
-    float vOut = (float)vIn;
+    char *vIn = str;
+    float vOut = (float)strtod(vIn, NULL);
 
     return vOut;
 }
 
-void CpuVitor::digitsToChar(Digit *digit, char *vet, int size, bool dot, int pos)
+void CpuVitor::digitsToChar(char *vet, Digit *digit, int size, bool dot, int pos)
 {
 
     if (dot == true)
@@ -169,16 +182,18 @@ void CpuVitor::digitsToChar(Digit *digit, char *vet, int size, bool dot, int pos
         size = size + 1;
     }
 
+    int j = 0;
+
     for (int i = 0; i < size; i++)
     {
 
         if (dot == true && i == pos)
         {
             vet[i] = '.';
-            i++;
+            continue;
         }
 
-        switch (digit[i])
+        switch (digit[j++])
         {
         case ZERO:
             vet[i] = '0';
@@ -273,26 +288,13 @@ float CpuVitor::convertDigitsToFloat(Digit *digits, int size)
     return amount;
 }
 
-void CpuVitor::floatToChar(float num)
+void CpuVitor::floatToChar(float num, char *str)
 {
-    std::sprintf(this->memochar, "%.1f", num);
-}
-
-float CpuVitor::charToFloat(char *operation)
-{
-    float num;
-    num = atof(operation);
-    if (this->signal == NEGATIVE)
-    {
-        num = num * -1;
-        this->signal = POSITIVE;
-    }
-    return num;
+    std::sprintf(str, "%.1f", num);
 }
 
 void CpuVitor::convertResultToDigit(float num, int size)
 {
-    this->floatToChar(num);
 
     if (num < 0)
     {
@@ -301,7 +303,9 @@ void CpuVitor::convertResultToDigit(float num, int size)
 
     char result[100];
 
-    std::sprintf(result, "%.2f", num);
+    this->floatToChar(num, result);
+
+    std::cout << result;
 
     this->digitsOperand1Count = 0;
     this->digitsOperand2Count = 0;
@@ -309,80 +313,131 @@ void CpuVitor::convertResultToDigit(float num, int size)
 
     for (int i = 0; i < size; i++)
     {
+
         switch (result[i])
         {
         case '0':
-            this->receiveDigit(ZERO);
-            if (this->memochar[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
+            // this->receiveDigit(ZERO);
+            // if (this->memochar[i + 1] == '.')
+            // {
+            //     this->decimal_separator = true;
+            // }
+            this->digitsOperand1[i] == ZERO;
+
             break;
         case '1':
-            this->receiveDigit(ONE);
-            if (this->memochar[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
+            // this->receiveDigit(ONE);
+            // if (this->memochar[i + 1] == '.')
+            // {
+            //     this->decimal_separator = true;
+            // }
+            this->digitsOperand1[i] == ONE;
+
             break;
         case '2':
-            this->receiveDigit(TWO);
-            if (this->memochar[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
+            // this->receiveDigit(TWO);
+            // if (this->memochar[i + 1] == '.')
+            // {
+            //     this->decimal_separator = true;
+            // }
+            this->digitsOperand1[i] == TWO;
+
             break;
         case '3':
-            this->receiveDigit(THREE);
-            if (this->memochar[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
+            // this->receiveDigit(THREE);
+            // if (this->memochar[i + 1] == '.')
+            // {
+            //     this->decimal_separator = true;
+            // }
+            this->digitsOperand1[i] == THREE;
+
             break;
         case '4':
-            this->receiveDigit(FOUR);
-            if (this->memochar[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
+            // this->receiveDigit(FOUR);
+            // if (this->memochar[i + 1] == '.')
+            // {
+            //     this->decimal_separator = true;
+            // }
+            this->digitsOperand1[i] == FOUR;
+
             break;
         case '5':
-            this->receiveDigit(FIVE);
-            if (this->memochar[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
+            // this->receiveDigit(FIVE);
+            // if (this->memochar[i + 1] == '.')
+            // {
+            //     this->decimal_separator = true;
+            // }
+            this->digitsOperand1[i] == FIVE;
+
             break;
         case '6':
-            this->receiveDigit(SIX);
-            if (this->memochar[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
+            // this->receiveDigit(SIX);
+            // if (this->memochar[i + 1] == '.')
+            // {
+            //     this->decimal_separator = true;
+            // }
+            this->digitsOperand1[i] == SIX;
+
             break;
         case '7':
-            this->receiveDigit(SEVEN);
-            if (this->memochar[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
+            // this->receiveDigit(SEVEN);
+            // if (this->memochar[i + 1] == '.')
+            // {
+            //     this->decimal_separator = true;
+            // }
+            this->digitsOperand1[i] == SEVEN;
+
             break;
         case '8':
-            this->receiveDigit(EIGHT);
-            if (this->memochar[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
+            // this->receiveDigit(EIGHT);
+            // if (this->memochar[i + 1] == '.')
+            // {
+            //     this->decimal_separator = true;
+            // }
+            this->digitsOperand1[i] == EIGHT;
+
             break;
         case '9':
-            this->receiveDigit(NINE);
-            if (this->memochar[i + 1] == '.')
-            {
-                this->decimal_separator = true;
-            }
+            // this->receiveDigit(NINE);
+            // if (this->memochar[i + 1] == '.')
+            // {
+            //     this->decimal_separator = true;
+            // }
+            this->digitsOperand1[i] == NINE;
+
+            break;
+
+        case '.':
+            this->dotControlFirstOp == i - 1;
             break;
         }
+
+        this->digitsOperand1Count++;
     }
+
+    this->digitsOperand1Count -= 1;
+}
+
+void CpuVitor::showDigit(Digit *memo, int *size, int *dotPos)
+{
+
+    for (int i = 0; i < *size; i++)
+    {
+        if (i == *dotPos)
+        {
+            this->display->addDigit(memo[i], true);
+        }
+        else
+        {
+            this->display->addDigit(memo[i]);
+        }
+    }
+
+    std::cout << '\n';
+    std::cout << *size;
+    std::cout << '\n';
+    std::cout << *dotPos;
+    std::cout << '\n';
 }
 
 int CpuVitor::countChar(char *str)

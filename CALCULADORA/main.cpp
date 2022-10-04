@@ -28,12 +28,12 @@ void testCpu(CpuVitor &cpu)
   cpu.receiveControl(ON_CLEAR_ERROR);
   cpu.receiveDigit(ONE);
   cpu.receiveControl(DECIMAL_SEPARATOR);
-  cpu.receiveDigit(ONE);
-  cpu.receiveOperation(ADDITION);
-  cpu.receiveDigit(ONE);
-  cpu.receiveControl(DECIMAL_SEPARATOR);
-  cpu.receiveDigit(THREE);
-  cpu.receiveControl(EQUAL);
+  cpu.receiveDigit(FOUR);
+  // cpu.receiveOperation(ADDITION);
+  // cpu.receiveDigit(ONE);
+  // cpu.receiveControl(DECIMAL_SEPARATOR);
+  // cpu.receiveDigit(THREE);
+  cpu.receiveOperation(EQUAL);
 }
 
 void testKeyboard(Keyboard &keyboard)

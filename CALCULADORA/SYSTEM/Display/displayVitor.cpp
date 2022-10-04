@@ -32,96 +32,46 @@ void DisplayVitor::refresh()
         {
         case ZERO:
             this->showDigitShape("..VVVV..", ".VV..VV.", ".VV..VV.", ".VV..VV.", "..VVVV..", i);
-            if (this->decimal_separator == true)
-            {
-                this->showDigitShape("........", "........", "........", ".VV.....", ".VV.....", i + 1);
-                i++;
-                this->decimal_separator = false;
-            }
             break;
         case ONE:
             this->showDigitShape("...VV...", "..VVV...", "...VV...", "...VV...", ".VVVVVV.", i);
-            if (this->decimal_separator == true)
-            {
-                this->showDigitShape("........", "........", "........", ".VV.....", ".VV.....", i + 1);
-                i++;
-                this->decimal_separator = false;
-            }
             break;
         case TWO:
             this->showDigitShape("..VVVV..", ".....VV.", "..VVVV..", ".VV.....", ".VVVVVV.", i);
-            if (this->decimal_separator == true)
-            {
-                this->showDigitShape("........", "........", "........", ".VV.....", ".VV.....", i + 1);
-                i++;
-                this->decimal_separator = false;
-            }
             break;
         case THREE:
             this->showDigitShape(".VVVVVV.", "....VV..", "...VVV..", ".....VV.", ".VVVVV..", i);
-            if (this->decimal_separator == true)
-            {
-                this->showDigitShape("........", "........", "........", ".VV.....", ".VV.....", i + 1);
-                i++;
-                this->decimal_separator = false;
-            }
             break;
         case FOUR:
             this->showDigitShape(".VV..VV.", ".VV..VV.", ".VVVVVV.", ".....VV.", ".....VV.", i);
-            if (this->decimal_separator == true)
-            {
-                this->showDigitShape("........", "........", "........", ".VV.....", ".VV.....", i + 1);
-                i++;
-                this->decimal_separator = false;
-            }
             break;
         case FIVE:
             this->showDigitShape(".VVVVVV.", ".VV.....", "..VVVV..", ".....VV.", ".VVVVV..", i);
-            if (this->decimal_separator == true)
-            {
-                this->showDigitShape("........", "........", "........", ".VV.....", ".VV.....", i + 1);
-                i++;
-                this->decimal_separator = false;
-            }
             break;
         case SIX:
             this->showDigitShape("...VV...", "..VV....", ".VVVVV..", ".VV..VV.", "..VVVV..", i);
-            if (this->decimal_separator == true)
-            {
-                this->showDigitShape("........", "........", "........", ".VV.....", ".VV.....", i + 1);
-                i++;
-                this->decimal_separator = false;
-            }
             break;
         case SEVEN:
             this->showDigitShape(".VVVVVV.", "....VV..", "...VV...", "..VV....", ".VV.....", i);
-            if (this->decimal_separator == true)
-            {
-                this->showDigitShape("........", "........", "........", ".VV.....", ".VV.....", i + 1);
-                i++;
-                this->decimal_separator = false;
-            }
             break;
         case EIGHT:
             this->showDigitShape("..VVVV..", ".VV..VV.", "..VVVV..", ".VV..VV.", "..VVVV..", i);
-            if (this->decimal_separator == true)
-            {
-                this->showDigitShape("........", "........", "........", ".VV.....", ".VV.....", i + 1);
-                i++;
-                this->decimal_separator = false;
-            }
             break;
         case NINE:
             this->showDigitShape("..VVVV..", ".VV..VV.", "..VVVV..", "...VV...", "..VV....", i);
-            if (this->decimal_separator == true)
-            {
-                this->showDigitShape("........", "........", "........", ".VV.....", ".VV.....", i + 1);
-                i++;
-                this->decimal_separator = false;
-            }
             break;
-        default:
-            this->showDigitShape("..VVVV..", ".VV..VV.", "....VV..", "...VV...", "...VV...", i);
+        }
+
+        _sleep(500);
+
+        printf("%i", i);
+
+        if (this->dotCount == i)
+        {
+            this->showDigitShape("........", "........", "........", ".VV.....", ".VV.....", i);
+            i++;
+            printf("#");
+            this->decimal_separator = false;
         }
     }
 }
@@ -154,13 +104,10 @@ void DisplayVitor::addDigit(Digit digit, bool withDot)
         this->refresh();
     }
 
-    if (withDot == true)
+    if (withDot == true && this->decimalSeparatorCount == 0)
     {
-        if (this->decimalSeparatorCount == 0)
-        {
-            this->decimalSeparatorCount += 1;
-        }
-
+        this->dotCount = this->digitsCount;
+        this->decimalSeparatorCount += 1;
         this->decimal_separator = true;
     }
 }
@@ -174,6 +121,5 @@ void DisplayVitor::setSignal(Signal signal)
 void DisplayVitor::clear()
 {
     this->digitsCount = 0;
-    this->dotCount = 0;
     console.clear_screen();
 }
