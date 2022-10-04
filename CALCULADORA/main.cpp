@@ -26,13 +26,14 @@ void testCpu(CpuVitor &cpu)
 {
   std::cout << "Testing CPU...\n";
   cpu.receiveControl(ON_CLEAR_ERROR);
-  cpu.receiveDigit(ONE);
-  cpu.receiveControl(DECIMAL_SEPARATOR);
   cpu.receiveDigit(FOUR);
-  // cpu.receiveOperation(ADDITION);
-  // cpu.receiveDigit(ONE);
   // cpu.receiveControl(DECIMAL_SEPARATOR);
-  // cpu.receiveDigit(THREE);
+  cpu.receiveDigit(EIGHT);
+  cpu.receiveOperation(ADDITION);
+  cpu.receiveDigit(ONE);
+  // cpu.receiveControl(DECIMAL_SEPARATOR);
+  cpu.receiveDigit(FOUR);
+  // cpu.receiveDigit(ONE);
   cpu.receiveOperation(EQUAL);
 }
 

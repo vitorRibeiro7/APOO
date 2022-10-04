@@ -28,6 +28,8 @@ void DisplayVitor::refresh()
 
     for (int i = 1; i <= this->displayRefreshCount; i++)
     {
+
+
         switch (this->digits[i - 1])
         {
         case ZERO:
@@ -61,17 +63,10 @@ void DisplayVitor::refresh()
             this->showDigitShape("..VVVV..", ".VV..VV.", "..VVVV..", "...VV...", "..VV....", i);
             break;
         }
-
-        _sleep(500);
-
-        printf("%i", i);
-
-        if (this->dotCount == i)
+        
+        if (this->decimal_position != -1 && this->decimal_position == i)
         {
             this->showDigitShape("........", "........", "........", ".VV.....", ".VV.....", i);
-            i++;
-            printf("#");
-            this->decimal_separator = false;
         }
     }
 }
@@ -93,22 +88,30 @@ void DisplayVitor::showDigitShape(const char *line1, const char *line2, const ch
 DisplayVitor::DisplayVitor()
 {
     this->console.init(0, 0);
+    this->decimal_position = -1;
     this->clear();
 }
 
 void DisplayVitor::addDigit(Digit digit, bool withDot)
 {
+    if (digit == NO_DIGIT)
+    {
+        if (withDot == true && this->decimal_position == -1)
+        {
+            this->decimal_position = digitsCount;
+        }
+        this->refresh();
+        return;
+    }
     if (this->digitsCount < MAX_DIGITS)
     {
         digits[this->digitsCount++] = digit;
-        this->refresh();
-    }
 
-    if (withDot == true && this->decimalSeparatorCount == 0)
-    {
-        this->dotCount = this->digitsCount;
-        this->decimalSeparatorCount += 1;
-        this->decimal_separator = true;
+        if (withDot == true && this->decimal_position == -1)
+        {
+            this->decimal_position = digitsCount;
+        }
+        this->refresh();
     }
 }
 
@@ -121,5 +124,7 @@ void DisplayVitor::setSignal(Signal signal)
 void DisplayVitor::clear()
 {
     this->digitsCount = 0;
-    console.clear_screen();
+    this->signal = POSITIVE;
+    this->decimal_position = -1;
+    this->refresh();
 }

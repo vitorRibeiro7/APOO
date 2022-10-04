@@ -23,6 +23,8 @@ private:
     void digitsToChar(char *vet, Digit *digits, int size, bool dot, int pos);
     float charToFloat(char *str);
 
+    void debug(Digit *);
+
     void showDigit(Digit *, int *, int *);
 
     // MEMORIA

@@ -21,6 +21,8 @@ private:
     bool decimal_separator = false;
     int decimalSeparatorCount = 0;
 
+    int decimal_position = -1;
+
 public:
     DisplayVitor();
     void addDigit(Digit digit, bool withDot = false);

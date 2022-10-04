@@ -11,7 +11,8 @@ enum Digit
     SIX,
     SEVEN,
     EIGHT,
-    NINE
+    NINE,
+    NO_DIGIT
 };
 
 enum Signal
