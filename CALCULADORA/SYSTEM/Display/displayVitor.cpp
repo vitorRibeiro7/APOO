@@ -176,12 +176,4 @@ void DisplayVitor::clear()
     this->digitsCount = 0;
     this->dotCount = 0;
     console.clear_screen();
-    for (int i = 0; i < 1; i++)
-    {
-        this->showDigitShape("..VVVV..", ".VV..VV.", ".VV..VV.", ".VV..VV.", "..VVVV..", i);
-        for (int j = 1; j < MAX_DIGITS; j++)
-        {
-            this->showDigitShape("........", "........", "........", "........", "........", j);
-        }
-    }
 }

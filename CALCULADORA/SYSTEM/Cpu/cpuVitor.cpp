@@ -119,8 +119,14 @@ void CpuVitor::setDisplay(Display &display)
 void CpuVitor::operate()
 {
 
-    this->memo1 = convertDigitsToFloat(this->digitsOperand1, this->digitsOperand1Count);
-    this->memo2 = convertDigitsToFloat(this->digitsOperand2, this->digitsOperand2Count);
+    // this->memo1 = convertDigitsToFloat(this->digitsOperand1, this->digitsOperand1Count);
+    // this->memo2 = convertDigitsToFloat(this->digitsOperand2, this->digitsOperand2Count);
+
+    digitsToChar(this->digitsOperand1, this->memo1Char, this->digitsOperand1Count, this->dotOne, this->dotControlFirstOp);
+    digitsToChar(this->digitsOperand2, this->memo2Char, this->digitsOperand2Count, this->dotSec, this->dotControlSecondOp);
+
+    this->memo1 = charToFloat(this->memo1Char);
+    this->memo2 = charToFloat(this->memo2Char);
 
     switch (this->operation)
     {
@@ -141,6 +147,7 @@ void CpuVitor::operate()
     default:
         break;
     }
+
     floatToChar(this->memo);
     this->memoCount = countChar(this->memochar);
     convertResultToDigit(this->memo, this->memoCount);
@@ -268,7 +275,7 @@ float CpuVitor::convertDigitsToFloat(Digit *digits, int size)
 
 void CpuVitor::floatToChar(float num)
 {
-    std::sprintf(this->memochar, "%.0f", num);
+    std::sprintf(this->memochar, "%.1f", num);
 }
 
 float CpuVitor::charToFloat(char *operation)
@@ -306,37 +313,73 @@ void CpuVitor::convertResultToDigit(float num, int size)
         {
         case '0':
             this->receiveDigit(ZERO);
-            if (/* condition */)
+            if (this->memochar[i + 1] == '.')
             {
-                /* code */
+                this->decimal_separator = true;
             }
             break;
         case '1':
             this->receiveDigit(ONE);
+            if (this->memochar[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '2':
             this->receiveDigit(TWO);
+            if (this->memochar[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '3':
             this->receiveDigit(THREE);
+            if (this->memochar[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '4':
             this->receiveDigit(FOUR);
+            if (this->memochar[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '5':
             this->receiveDigit(FIVE);
+            if (this->memochar[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '6':
             this->receiveDigit(SIX);
+            if (this->memochar[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '7':
             this->receiveDigit(SEVEN);
+            if (this->memochar[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '8':
             this->receiveDigit(EIGHT);
+            if (this->memochar[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         case '9':
             this->receiveDigit(NINE);
+            if (this->memochar[i + 1] == '.')
+            {
+                this->decimal_separator = true;
+            }
             break;
         }
     }
