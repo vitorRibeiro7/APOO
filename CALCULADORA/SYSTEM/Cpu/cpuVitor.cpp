@@ -8,8 +8,8 @@ CpuVitor::CpuVitor()
     this->digitsOperand1Count = 0;
     this->digitsOperand2Count = 0;
 
-    this->dotControlFirstOp = 0;
-    this->dotControlSecondOp = 0;
+    this->dotControlFirstOp = -1;
+    this->dotControlSecondOp = -1;
 
     this->memo = 0;
     this->memo1 = 0;
@@ -74,11 +74,11 @@ void CpuVitor::receiveControl(Control control)
         this->memo2 = 0;
         this->memory = 0;
 
-        this->operation == NOOP;
+        this->operation = NOOP;
         this->display ? this->display->clear() : void();
         this->display ? this->display->addDigit(ZERO) : void();
 
-        this->decimal_separator == false;
+        this->decimal_separator = false;
 
         this->digitsOperand1Count = 0;
         this->digitsOperand2Count = 0;
@@ -165,8 +165,7 @@ void CpuVitor::operate()
         break;
     }
 
-    floatToChar(this->memo, this->memochar);
-    // trataZero(this->memochar);
+    // floatToChar(this->memo, this->memochar);
     this->memoCount = countChar(this->memochar);
 
     // std::cout << '\n';
@@ -177,7 +176,7 @@ void CpuVitor::operate()
 
     convertResultToDigit(this->memo, this->memoCount);
 
-    debug(this->digitsOperand1);
+    // debug(this->digitsOperand1);
 
     this->display->clear();
     showDigit(this->digitsOperand1, &this->digitsOperand1Count, &this->dotControlFirstOp);
@@ -328,6 +327,12 @@ void CpuVitor::convertResultToDigit(float num, int size)
     char result[100];
 
     this->floatToChar(num, result);
+
+    if (this->dotControlFirstOp == -1 && this->dotControlSecondOp == -1)
+    {
+        result[size - 5] = '\0';
+        size -= 5;
+    }
 
     std::cout << '\n';
     std::cout << result;

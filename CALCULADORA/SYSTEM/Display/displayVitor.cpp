@@ -8,7 +8,7 @@ void DisplayVitor::refresh()
     console.set_color(Color::FG_Magenta);
     console.clear_screen();
 
-    if (this->decimalSeparatorCount > 0)
+    if (this->decimalSeparatorCount > -1)
     {
         this->displayRefreshCount = this->digitsCount + 1;
     }
@@ -26,48 +26,60 @@ void DisplayVitor::refresh()
         this->showDigitShape("........", "........", "........", "........", "........", 0);
     }
 
-    for (int i = 1; i <= this->displayRefreshCount; i++)
+    int i = 1;
+    int j = this->decimal_position;
+
+    for (int x = 1; x <= this->displayRefreshCount; x++)
     {
+
+        if (x == this->decimal_position)
+        {
+            this->showDigitShape("........", "........", "........", ".VV.....", ".VV.....", x);
+            continue;
+        }
 
         switch (this->digits[i - 1])
         {
         case ZERO:
-            this->showDigitShape("..VVVV..", ".VV..VV.", ".VV..VV.", ".VV..VV.", "..VVVV..", i);
+            this->showDigitShape("..VVVV..", ".VV..VV.", ".VV..VV.", ".VV..VV.", "..VVVV..", x);
+            i++;
             break;
         case ONE:
-            this->showDigitShape("...VV...", "..VVV...", "...VV...", "...VV...", ".VVVVVV.", i);
+            this->showDigitShape("...VV...", "..VVV...", "...VV...", "...VV...", ".VVVVVV.", x);
+            i++;
             break;
         case TWO:
-            this->showDigitShape("..VVVV..", ".....VV.", "..VVVV..", ".VV.....", ".VVVVVV.", i);
+            this->showDigitShape("..VVVV..", ".....VV.", "..VVVV..", ".VV.....", ".VVVVVV.", x);
+            i++;
             break;
         case THREE:
-            this->showDigitShape(".VVVVVV.", "....VV..", "...VVV..", ".....VV.", ".VVVVV..", i);
+            this->showDigitShape(".VVVVVV.", "....VV..", "...VVV..", ".....VV.", ".VVVVV..", x);
+            i++;
             break;
         case FOUR:
-            this->showDigitShape(".VV..VV.", ".VV..VV.", ".VVVVVV.", ".....VV.", ".....VV.", i);
+            this->showDigitShape(".VV..VV.", ".VV..VV.", ".VVVVVV.", ".....VV.", ".....VV.", x);
+            i++;
             break;
         case FIVE:
-            this->showDigitShape(".VVVVVV.", ".VV.....", "..VVVV..", ".....VV.", ".VVVVV..", i);
+            this->showDigitShape(".VVVVVV.", ".VV.....", "..VVVV..", ".....VV.", ".VVVVV..", x);
+            i++;
             break;
         case SIX:
-            this->showDigitShape("...VV...", "..VV....", ".VVVVV..", ".VV..VV.", "..VVVV..", i);
+            this->showDigitShape("...VV...", "..VV....", ".VVVVV..", ".VV..VV.", "..VVVV..", x);
+            i++;
             break;
         case SEVEN:
-            this->showDigitShape(".VVVVVV.", "....VV..", "...VV...", "..VV....", ".VV.....", i);
+            this->showDigitShape(".VVVVVV.", "....VV..", "...VV...", "..VV....", ".VV.....", x);
+            i++;
             break;
         case EIGHT:
-            this->showDigitShape("..VVVV..", ".VV..VV.", "..VVVV..", ".VV..VV.", "..VVVV..", i);
+            this->showDigitShape("..VVVV..", ".VV..VV.", "..VVVV..", ".VV..VV.", "..VVVV..", x);
+            i++;
             break;
         case NINE:
-            this->showDigitShape("..VVVV..", ".VV..VV.", "..VVVV..", "...VV...", "..VV....", i);
-            break;
-        }
-
-        if (this->decimal_separator == true)
-        {
-            this->showDigitShape("........", "........", "........", ".VV.....", ".VV.....", i + 1);
+            this->showDigitShape("..VVVV..", ".VV..VV.", "..VVVV..", "...VV...", "..VV....", x);
             i++;
-            this->decimal_separator = false;
+            break;
         }
     }
 }
@@ -98,11 +110,15 @@ void DisplayVitor::addDigit(Digit digit, bool withDot)
     if (this->digitsCount < MAX_DIGITS)
     {
 
+        if (this->decimal_position != -1 && digit == ZERO)
+        {
+            return;
+        }
+
         digits[this->digitsCount++] = digit;
 
         if (withDot == true && this->decimal_position == -1)
         {
-            this->decimal_separator = true;
             this->decimal_position = digitsCount;
         }
         this->refresh();
@@ -119,6 +135,7 @@ void DisplayVitor::clear()
 {
     this->intBlock = false;
     this->digitsCount = 0;
+    this->decimal_position = -1;
     this->signal = POSITIVE;
     this->refresh();
 }

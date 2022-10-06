@@ -43,8 +43,8 @@ private:
 
     bool dotOne = false;
     bool dotSec = false;
-    int dotControlFirstOp = 0;
-    int dotControlSecondOp = 0;
+    int dotControlFirstOp = -1;
+    int dotControlSecondOp = -1;
 
     // BOOL
     bool decimal_separator = false;
