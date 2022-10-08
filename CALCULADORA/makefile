@@ -9,4 +9,5 @@ all:
 
 del:
 	rm *.o
-	rm main.exe
+	rm main
+	clear

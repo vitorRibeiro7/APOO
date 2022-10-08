@@ -110,10 +110,10 @@ void DisplayVitor::addDigit(Digit digit, bool withDot)
     if (this->digitsCount < MAX_DIGITS)
     {
 
-        if (this->decimal_position != -1 && digit == ZERO)
-        {
-            return;
-        }
+        // if (this->decimal_position != -1 && digit == ZERO)
+        // {
+        //     return;
+        // }
 
         digits[this->digitsCount++] = digit;
 

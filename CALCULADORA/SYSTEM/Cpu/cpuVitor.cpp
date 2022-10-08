@@ -20,7 +20,6 @@ CpuVitor::CpuVitor()
 
 void CpuVitor::receiveDigit(Digit digit)
 {
-
     this->digitsOperand1Count == 0 && this->operation == NOOP ? this->display->clear() : void();
 
     // Guardo o dígito no operanto correspondente
@@ -121,7 +120,6 @@ void CpuVitor::setDisplay(Display &display)
 
 void CpuVitor::operate()
 {
-
     // this->memo1 = convertDigitsToFloat(this->digitsOperand1, this->digitsOperand1Count);
     // this->memo2 = convertDigitsToFloat(this->digitsOperand2, this->digitsOperand2Count);
 
@@ -164,23 +162,12 @@ void CpuVitor::operate()
 
     floatToChar(this->memo, this->memochar);
     this->memoCount = countChar(this->memochar);
-
-    // std::cout << '\n';
-    // std::cout << this->memo << '\n';
-    // std::cout << this->memochar << '\n';
-    // std::cout << this->memoCount << '\n';
-    // std::cout << '\n';
-
     convertResultToDigit(this->memo, this->memoCount);
 
     debug(this->digitsOperand1);
 
     this->display->clear();
     showDigit(this->digitsOperand1, &this->digitsOperand1Count, &this->dotControlFirstOp);
-}
-
-void CpuVitor::trataZero(char *str)
-{
 }
 
 float CpuVitor::charToFloat(char *str)
@@ -248,69 +235,21 @@ void CpuVitor::digitsToChar(char *vet, Digit *digit, int size, bool dot, int pos
     }
     for (int i = 0; i < size; i++)
     {
-        printf("[%i]%c\n\n", i, vet[i]);
+        printf("[%i]%c\n", i, vet[i]);
+        printf("\n");
     }
-}
-
-float CpuVitor::convertDigitsToFloat(Digit *digits, int size)
-{
-
-    float amount = 0;
-    int pin = 1;
-    int temp = 0;
-
-    for (int i = size - 1; i >= 0; i--)
-    {
-
-        temp = 0;
-
-        switch (digits[i])
-        {
-        case ZERO:
-            temp = 0;
-            break;
-        case ONE:
-            temp = 1;
-            break;
-        case TWO:
-            temp = 2;
-            break;
-        case THREE:
-            temp = 3;
-            break;
-        case FOUR:
-            temp = 4;
-            break;
-        case FIVE:
-            temp = 5;
-            break;
-        case SIX:
-            temp = 6;
-            break;
-        case SEVEN:
-            temp = 7;
-            break;
-        case EIGHT:
-            temp = 8;
-            break;
-        case NINE:
-            temp = 9;
-            break;
-        default:
-            break;
-        }
-
-        temp = temp * pin;
-        pin *= 10;
-        amount += temp;
-    }
-
-    return amount;
 }
 
 void CpuVitor::floatToChar(float num, char *str)
 {
-    std::sprintf(str, "%.3f", num);
+    if (this->dotControlFirstOp == -1 && this->dotControlSecondOp == -1)
+    {
+        std::sprintf(str, "%.0f", num);
+    }
+    else
+    {
+        std::sprintf(str, "%.3f", num);
+    }
 }
 
 void CpuVitor::convertResultToDigit(float num, int size)
@@ -325,12 +264,6 @@ void CpuVitor::convertResultToDigit(float num, int size)
 
     this->floatToChar(num, result);
 
-    // if (this->dotControlFirstOp == -1 && this->dotControlSecondOp == -1)
-    // {
-    //     result[size - 5] = '\0';
-    //     size -= 5;
-    // }
-
     std::cout << '\n';
     std::cout << result;
     std::cout << '\n';
@@ -338,7 +271,6 @@ void CpuVitor::convertResultToDigit(float num, int size)
     this->digitsOperand1Count = 0;
     this->digitsOperand2Count = 0;
     this->operation = NOOP;
-    this->dotControlFirstOp = -1;
 
     for (int i = 0; i < size; i++)
     {
@@ -376,7 +308,7 @@ void CpuVitor::convertResultToDigit(float num, int size)
             this->digitsOperand1[this->digitsOperand1Count++] = NINE;
             break;
         case '.':
-            this->dotControlFirstOp = i;
+            this->dotControlFirstOp = i - 1;
             break;
         }
     }

@@ -16,13 +16,11 @@ private:
 
     // FUNÇÕES AUXILIARES
     void operate();
-    float convertDigitsToFloat(Digit *digits, int size);
     void floatToChar(float operation, char *str);
     void convertResultToDigit(float num, int size);
     int countChar(char *str);
     void digitsToChar(char *vet, Digit *digits, int size, bool dot, int pos);
     float charToFloat(char *str);
-    void trataZero(char *str);
 
     void debug(Digit *);
 
@@ -36,11 +34,6 @@ private:
     char memo1Char[MAX_DIGITS];
     char memo2Char[MAX_DIGITS];
     char memochar[MAX_DIGITS];
-
-    float memoryNum;
-    int memoryDotPos;
-    Digit memoryDigits[MAX_DIGITS];
-
 
     Signal signal;
 
