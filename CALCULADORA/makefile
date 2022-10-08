@@ -4,10 +4,9 @@ all:
 	g++ -c ./SYSTEM/Keyboard/keyboardVitor.cpp -o keyboardVitor.o
 	g++ -c ./SYSTEM/Key/keyVitor.cpp -o keyVitor.o
 	g++ -c ./SYSTEM/Cpu/cpuVitor.cpp -o cpuVitor.o
-	g++ main.cpp consoleVitor.o displayVitor.o cpuVitor.o KeyboardVitor.o KeyVitor.o -o main
+	g++ main.cpp consoleVitor.o displayVitor.o cpuVitor.o keyboardVitor.o keyVitor.o -o main
 	./main
 
 del:
 	rm *.o
-	rm main
 	rm main.exe

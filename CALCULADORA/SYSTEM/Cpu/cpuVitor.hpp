@@ -35,9 +35,12 @@ private:
     float memo2;
     char memo1Char[MAX_DIGITS];
     char memo2Char[MAX_DIGITS];
-    float memory;
-
     char memochar[MAX_DIGITS];
+
+    float memoryNum;
+    int memoryDotPos;
+    Digit memoryDigits[MAX_DIGITS];
+
 
     Signal signal;
 
