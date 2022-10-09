@@ -53,8 +53,14 @@ void testKeyboard(Keyboard &keyboard)
   try
   {
     keyboard.findKey('1').press();
+    keyboard.findKey('0').press();
+    keyboard.findKey('.').press();
+    keyboard.findKey('2').press();
     keyboard.findKey('+').press();
     keyboard.findKey('1').press();
+    keyboard.findKey('0').press();
+    keyboard.findKey('.').press();
+    keyboard.findKey('2').press();
     keyboard.findKey('=').press();
   }
   catch (const char *exception)
@@ -71,26 +77,50 @@ int main()
   CpuVitor c1;
   KeyboardVitor kb1;
 
+  KeyVitor keyZero('0', ZERO);
   KeyVitor keyOne('1', ONE);
   KeyVitor keyTwo('2', TWO);
   KeyVitor keyThree('3', THREE);
+  KeyVitor keyFour('4', FOUR);
+  KeyVitor keyFive('5', FIVE);
+  KeyVitor keySix('6', SIX);
+  KeyVitor keySeven('7', SEVEN);
+  KeyVitor keyEight('8', EIGHT);
+  KeyVitor keyNine('9', NINE);
+
+  KeyVitor keyDot('.', DECIMAL_SEPARATOR);
 
   KeyVitor keyAddition('+', ADDITION);
+  KeyVitor keySubtraction('-', SUBTRACTION);
+  KeyVitor keyMultiplication('*', MULTIPLICATION);
+  KeyVitor keyDivision('/', DIVISION);
   KeyVitor keyEqual('=', EQUAL);
 
   /* Fase de construção/ligação */
   c1.setDisplay(d1);
   kb1.setCpu(c1);
 
+  kb1.addKey(keyZero);
   kb1.addKey(keyOne);
   kb1.addKey(keyTwo);
   kb1.addKey(keyThree);
+  kb1.addKey(keyFour);
+  kb1.addKey(keyFive);
+  kb1.addKey(keySix);
+  kb1.addKey(keySeven);
+  kb1.addKey(keyEight);
+  kb1.addKey(keyNine);
+
+  kb1.addKey(keyDot);
 
   kb1.addKey(keyAddition);
+  kb1.addKey(keySubtraction);
+  kb1.addKey(keyMultiplication);
+  kb1.addKey(keyDivision);
   kb1.addKey(keyEqual);
 
   /* Fase de testes */
   // testDisplay(d1);
-  testCpu(c1);
-  // testKeyboard(kb1);
+  // testCpu(c1);
+  testKeyboard(kb1);
 }

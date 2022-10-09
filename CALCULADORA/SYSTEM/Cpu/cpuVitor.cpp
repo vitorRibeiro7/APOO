@@ -33,19 +33,11 @@ void CpuVitor::receiveDigit(Digit digit)
     }
 
     // Envio o dígito para o Display
-    // this->display->addDigit(digit, this->decimal_separator);
+    this->display->addDigit(digit, this->decimal_separator);
 }
 
 void CpuVitor::receiveOperation(Operation op)
 {
-
-    // if (op == EQUAL)
-    // {
-    //     this->display->clear();
-    //     showDigit(this->digitsOperand1, &this->digitsOperand1Count, &this->dotControlFirstOp);
-    //     return;
-    // }
-
     // Guardo a operação, mas antes verificar se já existe uma definida e já exisite um operand2
     if (op == EQUAL && this->digitsOperand2Count == 0)
     {
@@ -120,9 +112,6 @@ void CpuVitor::setDisplay(Display &display)
 
 void CpuVitor::operate()
 {
-    // this->memo1 = convertDigitsToFloat(this->digitsOperand1, this->digitsOperand1Count);
-    // this->memo2 = convertDigitsToFloat(this->digitsOperand2, this->digitsOperand2Count);
-
     digitsToChar(this->memo1Char, this->digitsOperand1, this->digitsOperand1Count, this->dotOne, this->dotControlFirstOp);
     digitsToChar(this->memo2Char, this->digitsOperand2, this->digitsOperand2Count, this->dotSec, this->dotControlSecondOp);
 
@@ -308,16 +297,20 @@ void CpuVitor::convertResultToDigit(float num, int size)
             this->digitsOperand1[this->digitsOperand1Count++] = NINE;
             break;
         case '.':
-            this->dotControlFirstOp = i - 1;
+            this->dotControlFirstOp = i;
             break;
         }
+
+        printf("--\n\n");
+        printf("%c\n", result[i]);
+        printf("--\n\n");
     }
 }
 
 void CpuVitor::showDigit(Digit *memo, int *size, int *dotPos)
 {
 
-    for (int i = 0; i < *size + 4; i++)
+    for (int i = 0; i < *size; i++)
     {
         if (i == *dotPos)
         {
@@ -341,7 +334,7 @@ void CpuVitor::debug(Digit *digit)
             printf("0");
             break;
         case ONE:
-            printf("9");
+            printf("1");
             break;
         case TWO:
             printf("2");
@@ -368,6 +361,7 @@ void CpuVitor::debug(Digit *digit)
             printf("9");
             break;
         default:
+            printf("?");
             break;
         }
     }
