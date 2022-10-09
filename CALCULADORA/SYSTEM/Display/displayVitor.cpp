@@ -8,7 +8,7 @@ void DisplayVitor::refresh()
     console.set_color(Color::FG_Magenta);
     console.clear_screen();
 
-    if (this->decimalSeparatorCount > -1)
+    if (this->decimalSeparatorCount > 0)
     {
         this->displayRefreshCount = this->digitsCount + 1;
     }
@@ -130,7 +130,6 @@ void DisplayVitor::clear()
     this->intBlock = false;
     this->digitsCount = 0;
     this->decimal_position = -1;
-    this->signal = POSITIVE;
     this->dotCount = 0;
     this->displayRefreshCount = 0;
     this->decimal_separator = false;

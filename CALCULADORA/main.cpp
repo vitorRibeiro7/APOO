@@ -52,15 +52,15 @@ void testKeyboard(Keyboard &keyboard)
 {
   try
   {
-    keyboard.findKey('1').press();
     keyboard.findKey('0').press();
     keyboard.findKey('.').press();
-    keyboard.findKey('2').press();
-    keyboard.findKey('+').press();
     keyboard.findKey('1').press();
+    keyboard.findKey('2').press();
+    keyboard.findKey('-').press();
     keyboard.findKey('0').press();
     keyboard.findKey('.').press();
-    keyboard.findKey('2').press();
+    keyboard.findKey('1').press();
+    keyboard.findKey('3').press();
     keyboard.findKey('=').press();
   }
   catch (const char *exception)
@@ -92,7 +92,7 @@ int main()
 
   KeyVitor keyAddition('+', ADDITION);
   KeyVitor keySubtraction('-', SUBTRACTION);
-  KeyVitor keyMultiplication('*', MULTIPLICATION);
+  KeyVitor keyMultiplication('x', MULTIPLICATION);
   KeyVitor keyDivision('/', DIVISION);
   KeyVitor keyEqual('=', EQUAL);
 

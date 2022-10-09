@@ -244,17 +244,17 @@ void CpuVitor::floatToChar(float num, char *str)
 void CpuVitor::convertResultToDigit(float num, int size)
 {
 
-    if (num < 0)
-    {
-        this->display ? this->display->setSignal(NEGATIVE) : void();
-    }
-
     char result[100];
 
     this->floatToChar(num, result);
 
+    if (num < 0 || result[0] == '-')
+    {
+        this->display->setSignal(NEGATIVE);
+    }
+
     std::cout << '\n';
-    std::cout << result;
+    std::cout << result << '\n';
     std::cout << '\n';
 
     this->digitsOperand1Count = 0;
@@ -297,7 +297,16 @@ void CpuVitor::convertResultToDigit(float num, int size)
             this->digitsOperand1[this->digitsOperand1Count++] = NINE;
             break;
         case '.':
-            this->dotControlFirstOp = i;
+
+            if (result[0] == '-')
+            {
+                this->dotControlFirstOp = i - 1;
+            }
+            else
+            {
+                this->dotControlFirstOp = i;
+            }
+
             break;
         }
 
@@ -365,6 +374,9 @@ void CpuVitor::debug(Digit *digit)
             break;
         }
     }
+    std::cout << '\n'
+              << this->digitsOperand1Count << '\n';
+    std::cout << this->dotControlFirstOp;
 }
 
 int CpuVitor::countChar(char *str)
