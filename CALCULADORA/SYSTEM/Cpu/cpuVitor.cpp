@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdio>
 #include <stdlib.h>
+#include <math.h>
 #include "cpuVitor.hpp"
 
 CpuVitor::CpuVitor()
@@ -39,11 +40,11 @@ void CpuVitor::receiveDigit(Digit digit)
 void CpuVitor::receiveOperation(Operation op)
 {
     // Guardo a operação, mas antes verificar se já existe uma definida e já exisite um operand2
-    if (op == EQUAL && this->digitsOperand2Count == 0)
-    {
-        operate();
-        return;
-    }
+    // if (op == EQUAL && this->digitsOperand2Count == 0)
+    // {
+    //     operate();
+    //     return;
+    // }
 
     if ((this->operation != NOOP) && (this->digitsOperand2Count > 0))
     {
@@ -51,6 +52,7 @@ void CpuVitor::receiveOperation(Operation op)
     }
 
     this->operation = op;
+    // this->memOp = op;
 }
 
 void CpuVitor::receiveControl(Control control)
@@ -102,6 +104,9 @@ void CpuVitor::receiveControl(Control control)
             }
         }
         break;
+    case EQUAL:
+        this->operate();
+        break;
     }
 }
 
@@ -127,8 +132,6 @@ void CpuVitor::operate()
 
     switch (this->operation)
     {
-    case EQUAL:
-        break;
     case ADDITION:
         this->memo = this->memo1 + this->memo2;
         std::cout << '+';
@@ -145,9 +148,18 @@ void CpuVitor::operate()
         this->memo = this->memo1 / this->memo2;
         std::cout << '/';
         break;
+    case SQUARE_ROOT:
+        this->memo = sqrt(this->memo1);
+        break;
+    case PERCENTAGE:
+        this->memo = this->memo1 / 100;
+        break;
     default:
         break;
     }
+
+    // this->saveLastNum = this->memo2;
+    // this->controlOp++;
 
     floatToChar(this->memo, this->memochar);
     this->memoCount = countChar(this->memochar);
@@ -237,7 +249,7 @@ void CpuVitor::floatToChar(float num, char *str)
     }
     else
     {
-        std::sprintf(str, "%.3f", num);
+        std::sprintf(str, "%f", num);
     }
 }
 
@@ -304,15 +316,11 @@ void CpuVitor::convertResultToDigit(float num, int size)
             }
             else
             {
-                this->dotControlFirstOp = i;
+                this->dotControlFirstOp = i - 1;
             }
 
             break;
         }
-
-        printf("--\n\n");
-        printf("%c\n", result[i]);
-        printf("--\n\n");
     }
 }
 

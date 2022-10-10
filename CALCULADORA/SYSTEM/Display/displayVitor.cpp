@@ -132,9 +132,5 @@ void DisplayVitor::clear()
     this->decimal_position = -1;
     this->dotCount = 0;
     this->displayRefreshCount = 0;
-    this->decimal_separator = false;
-    this->decimalSeparatorCount = 0;
-    this->decimal_position = -1;
-    this->intBlock = false;
     this->refresh();
 }

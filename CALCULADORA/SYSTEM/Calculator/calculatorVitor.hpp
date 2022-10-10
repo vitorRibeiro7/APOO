@@ -28,7 +28,8 @@ enum Operation
     MULTIPLICATION,
     DIVISION,
     NOOP,
-    EQUAL
+    SQUARE_ROOT,
+    PERCENTAGE
 };
 
 enum Control
@@ -38,7 +39,8 @@ enum Control
     MEMORY_READ_CLEAR,
     MEMORY_SUBTRACTION,
     MEMORY_ADDICTION,
-    DECIMAL_SEPARATOR
+    DECIMAL_SEPARATOR,
+    EQUAL
 };
 
 class Display

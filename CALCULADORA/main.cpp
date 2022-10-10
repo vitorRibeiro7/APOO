@@ -45,22 +45,31 @@ void testCpu(CpuVitor &cpu)
   // cpu.receiveDigit(ONE);
   // cpu.receiveControl(DECIMAL_SEPARATOR);
   // cpu.receiveDigit(ONE);
-  cpu.receiveOperation(EQUAL);
+  cpu.receiveControl(EQUAL);
 }
 
 void testKeyboard(Keyboard &keyboard)
 {
   try
   {
-    keyboard.findKey('0').press();
-    keyboard.findKey('.').press();
-    keyboard.findKey('1').press();
+    // keyboard.findKey('1').press();
+    // keyboard.findKey('0').press();
+    // keyboard.findKey('0').press();
+    // keyboard.findKey('0').press();
+    // keyboard.findKey('0').press();
+    // keyboard.findKey('0').press();
+    // keyboard.findKey('x').press();
+    // keyboard.findKey('1').press();
+    // keyboard.findKey('.').press();
+    // keyboard.findKey('5').press();
+    // keyboard.findKey('=').press();
+
+    keyboard.findKey('5').press();
+    keyboard.findKey('+').press();
     keyboard.findKey('2').press();
     keyboard.findKey('-').press();
-    keyboard.findKey('0').press();
-    keyboard.findKey('.').press();
     keyboard.findKey('1').press();
-    keyboard.findKey('3').press();
+    keyboard.findKey('0').press();
     keyboard.findKey('=').press();
   }
   catch (const char *exception)
@@ -94,6 +103,7 @@ int main()
   KeyVitor keySubtraction('-', SUBTRACTION);
   KeyVitor keyMultiplication('x', MULTIPLICATION);
   KeyVitor keyDivision('/', DIVISION);
+  KeyVitor keySquare('sqr', SQUARE_ROOT);
   KeyVitor keyEqual('=', EQUAL);
 
   /* Fase de construção/ligação */
@@ -117,6 +127,7 @@ int main()
   kb1.addKey(keySubtraction);
   kb1.addKey(keyMultiplication);
   kb1.addKey(keyDivision);
+  kb1.addKey(keySquare);
   kb1.addKey(keyEqual);
 
   /* Fase de testes */
