@@ -41,6 +41,10 @@ void DisplayVitor::refresh()
         switch (this->digits[i - 1])
         {
         case ZERO:
+            if (this->decimal_position != -1)
+            {
+                return;
+            }
             this->showDigitShape("..VVVV..", ".VV..VV.", ".VV..VV.", ".VV..VV.", "..VVVV..", x);
             i++;
             break;

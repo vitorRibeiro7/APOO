@@ -316,7 +316,7 @@ void CpuVitor::convertResultToDigit(float num, int size)
             }
             else
             {
-                this->dotControlFirstOp = i - 1;
+                this->dotControlFirstOp = i;
             }
 
             break;

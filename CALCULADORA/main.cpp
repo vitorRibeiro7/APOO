@@ -8,8 +8,7 @@
 
 void testDisplay(DisplayVitor &display)
 {
-  std::cout << "Testing DISPLAY...\n";
-  // display.setSignal(NEGATIVE);
+  display.setSignal(NEGATIVE);
   display.addDigit(ZERO);
   display.clear();
   display.addDigit(ZERO);
@@ -24,7 +23,6 @@ void testDisplay(DisplayVitor &display)
 
 void testCpu(CpuVitor &cpu)
 {
-  std::cout << "Testing CPU...\n";
   cpu.receiveControl(ON_CLEAR_ERROR);
   cpu.receiveDigit(ONE);
   cpu.receiveControl(DECIMAL_SEPARATOR);
@@ -65,9 +63,9 @@ void testKeyboard(Keyboard &keyboard)
     // keyboard.findKey('=').press();
 
     keyboard.findKey('5').press();
-    keyboard.findKey('+').press();
+    keyboard.findKey('.').press();
     keyboard.findKey('2').press();
-    keyboard.findKey('-').press();
+    keyboard.findKey('+').press();
     keyboard.findKey('1').press();
     keyboard.findKey('0').press();
     keyboard.findKey('=').press();
