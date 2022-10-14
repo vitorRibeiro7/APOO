@@ -38,7 +38,7 @@ private:
     Signal signal;
 
     // Operation memOp = NOOP;
-    // int controlOp = 0;
+    int controlOp = 0;
     // float saveLastNum = 0;
     // Digit digitsMemory[MAX_DIGITS];
     // int digitsMemoryCount = 0;

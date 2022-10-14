@@ -83,6 +83,7 @@ void CpuVitor::receiveControl(Control control)
         this->memo2 = 0;
         break;
     case MEMORY_SUBTRACTION:
+
         break;
     case MEMORY_ADDICTION:
         break;
@@ -249,7 +250,7 @@ void CpuVitor::floatToChar(float num, char *str)
     }
     else
     {
-        std::sprintf(str, "%f", num);
+        std::sprintf(str, "%.4f", num);
     }
 }
 
@@ -271,7 +272,7 @@ void CpuVitor::convertResultToDigit(float num, int size)
 
     this->digitsOperand1Count = 0;
     this->digitsOperand2Count = 0;
-    this->operation = NOOP;
+    // this->operation = NOOP;
 
     for (int i = 0; i < size; i++)
     {
@@ -309,7 +310,6 @@ void CpuVitor::convertResultToDigit(float num, int size)
             this->digitsOperand1[this->digitsOperand1Count++] = NINE;
             break;
         case '.':
-
             if (result[0] == '-')
             {
                 this->dotControlFirstOp = i - 1;

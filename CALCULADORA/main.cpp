@@ -62,11 +62,15 @@ void testKeyboard(Keyboard &keyboard)
     // keyboard.findKey('5').press();
     // keyboard.findKey('=').press();
 
-    keyboard.findKey('5').press();
-    keyboard.findKey('.').press();
-    keyboard.findKey('2').press();
+    keyboard.findKey('3').press();
+    keyboard.findKey('0').press();
     keyboard.findKey('+').press();
     keyboard.findKey('1').press();
+    keyboard.findKey('0').press();
+    keyboard.findKey('=').press();
+    keyboard.findKey('=').press();
+    keyboard.findKey('+').press();
+    keyboard.findKey('3').press();
     keyboard.findKey('0').press();
     keyboard.findKey('=').press();
   }
