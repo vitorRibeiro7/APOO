@@ -86,6 +86,9 @@ void CpuVitor::receiveControl(Control control)
 
         break;
     case MEMORY_ADDICTION:
+
+        
+
         break;
     case DECIMAL_SEPARATOR:
         if (this->operation == NOOP)
