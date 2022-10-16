@@ -22,7 +22,9 @@ private:
     void digitsToChar(char *vet, Digit *digits, int size, bool dot, int pos);
     float charToFloat(char *str);
 
-    void debug(Digit *);
+    void memoryCopy(Digit *, int size);
+    
+    void debug(Digit *, int size);
 
     void showDigit(Digit *, int *, int *);
 
@@ -45,6 +47,7 @@ private:
     int digitsMemoryCount = 0;
     bool dotMemory = false;
     int dotControlMemory = -1;
+    float memory = 0;
 
     bool dotOne = false;
     bool dotSec = false;

@@ -83,11 +83,45 @@ void CpuVitor::receiveControl(Control control)
         this->memo2 = 0;
         break;
     case MEMORY_SUBTRACTION:
+        if (this->controlOp == 0 && this->digitsOperand2Count == 0)
+        {
+            digitsToChar(this->memo1Char, this->digitsOperand1, this->digitsOperand1Count, this->dotOne, this->dotControlFirstOp);
+            this->memo1 = charToFloat(this->memo1Char);
+            this->memory = this->memory - this->memo1;
 
+            return;
+        }
+
+        if (this->digitsOperand1Count > 0)
+        {
+
+            digitsToChar(this->memo2Char, this->digitsOperand2, this->digitsOperand2Count, this->dotSec, this->dotControlSecondOp);
+            this->memo2 = charToFloat(this->memo2Char);
+            this->memory = this->memory - this->memo2;
+
+            return;
+        }
         break;
     case MEMORY_ADDICTION:
 
-        
+        if (this->controlOp == 0 && this->digitsOperand2Count == 0)
+        {
+            digitsToChar(this->memo1Char, this->digitsOperand1, this->digitsOperand1Count, this->dotOne, this->dotControlFirstOp);
+            this->memo1 = charToFloat(this->memo1Char);
+            this->memory = this->memory + this->memo1;
+
+            return;
+        }
+
+        if (this->digitsOperand1Count > 0)
+        {
+
+            digitsToChar(this->memo2Char, this->digitsOperand2, this->digitsOperand2Count, this->dotSec, this->dotControlSecondOp);
+            this->memo2 = charToFloat(this->memo2Char);
+            this->memory = this->memory + this->memo2;
+
+            return;
+        }
 
         break;
     case DECIMAL_SEPARATOR:
@@ -114,6 +148,17 @@ void CpuVitor::receiveControl(Control control)
     }
 }
 
+void CpuVitor::memoryCopy(Digit *source, int size)
+{
+
+    for (int i = 0; i < size; i++)
+    {
+        this->digitsMemory[this->digitsMemoryCount++] = source[i];
+    }
+
+    debug(this->digitsMemory, this->digitsMemoryCount);
+}
+
 void CpuVitor::setDisplay(Display &display)
 {
     this->display = &display;
@@ -127,18 +172,18 @@ void CpuVitor::operate()
     this->memo1 = charToFloat(this->memo1Char);
     this->memo2 = charToFloat(this->memo2Char);
 
-    std::cout << '\n';
-    std::cout << this->memo1;
-    std::cout << '\n';
-    std::cout << '\n';
-    std::cout << this->memo2;
-    std::cout << '\n';
+    // std::cout << '\n';
+    // std::cout << this->memo1;
+    // std::cout << '\n';
+    // std::cout << '\n';
+    // std::cout << this->memo2;
+    // std::cout << '\n';
 
     switch (this->operation)
     {
     case ADDITION:
         this->memo = this->memo1 + this->memo2;
-        std::cout << '+';
+        // std::cout << '+';
         break;
     case SUBTRACTION:
         this->memo = this->memo1 - this->memo2;
@@ -169,10 +214,12 @@ void CpuVitor::operate()
     this->memoCount = countChar(this->memochar);
     convertResultToDigit(this->memo, this->memoCount);
 
-    debug(this->digitsOperand1);
+    this->controlOp++;
 
-    this->display->clear();
-    showDigit(this->digitsOperand1, &this->digitsOperand1Count, &this->dotControlFirstOp);
+    // debug(this->digitsOperand1);
+
+    // this->display->clear();
+    // showDigit(this->digitsOperand1, &this->digitsOperand1Count, &this->dotControlFirstOp);
 }
 
 float CpuVitor::charToFloat(char *str)
@@ -269,9 +316,9 @@ void CpuVitor::convertResultToDigit(float num, int size)
         this->display->setSignal(NEGATIVE);
     }
 
-    std::cout << '\n';
-    std::cout << result << '\n';
-    std::cout << '\n';
+    // std::cout << '\n';
+    // std::cout << result << '\n';
+    // std::cout << '\n';
 
     this->digitsOperand1Count = 0;
     this->digitsOperand2Count = 0;
@@ -343,10 +390,10 @@ void CpuVitor::showDigit(Digit *memo, int *size, int *dotPos)
     }
 }
 
-void CpuVitor::debug(Digit *digit)
+void CpuVitor::debug(Digit *digit, int size)
 {
 
-    for (int i = 0; i < this->digitsOperand1Count; i++)
+    for (int i = 0; i < size; i++)
     {
         switch (digit[i])
         {
@@ -385,9 +432,9 @@ void CpuVitor::debug(Digit *digit)
             break;
         }
     }
-    std::cout << '\n'
-              << this->digitsOperand1Count << '\n';
-    std::cout << this->dotControlFirstOp;
+    // std::cout << '\n'
+    //           << this->digitsOperand1Count << '\n';
+    // std::cout << this->dotControlFirstOp;
 }
 
 int CpuVitor::countChar(char *str)

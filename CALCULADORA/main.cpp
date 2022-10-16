@@ -62,17 +62,29 @@ void testKeyboard(Keyboard &keyboard)
     // keyboard.findKey('5').press();
     // keyboard.findKey('=').press();
 
-    keyboard.findKey('3').press();
+    // keyboard.findKey('3').press();
+    // keyboard.findKey('0').press();
+    // keyboard.findKey('+').press();
+    // keyboard.findKey('1').press();
+    // keyboard.findKey('0').press();
+    // keyboard.findKey('=').press();
+    // keyboard.findKey('=').press();
+    // keyboard.findKey('+').press();
+    // keyboard.findKey('3').press();
+    // keyboard.findKey('0').press();
+    // keyboard.findKey('=').press();
+    // keyboard.findKey('m').press();
+
+    keyboard.findKey('1').press();
     keyboard.findKey('0').press();
     keyboard.findKey('+').press();
     keyboard.findKey('1').press();
+    keyboard.findKey('5').press();
+    keyboard.findKey('=').press();
+    keyboard.findKey('ma').press();
+    keyboard.findKey('1').press();
     keyboard.findKey('0').press();
-    keyboard.findKey('=').press();
-    keyboard.findKey('=').press();
-    keyboard.findKey('+').press();
-    keyboard.findKey('3').press();
-    keyboard.findKey('0').press();
-    keyboard.findKey('=').press();
+    keyboard.findKey('ms').press();
   }
   catch (const char *exception)
   {
@@ -108,6 +120,9 @@ int main()
   KeyVitor keySquare('sqr', SQUARE_ROOT);
   KeyVitor keyEqual('=', EQUAL);
 
+  KeyVitor keyMadd('ma', MEMORY_ADDICTION);
+  KeyVitor keyMsub('ms', MEMORY_SUBTRACTION);
+
   /* Fase de construção/ligação */
   c1.setDisplay(d1);
   kb1.setCpu(c1);
@@ -131,6 +146,9 @@ int main()
   kb1.addKey(keyDivision);
   kb1.addKey(keySquare);
   kb1.addKey(keyEqual);
+
+  kb1.addKey(keyMsub);
+  kb1.addKey(keyMadd);
 
   /* Fase de testes */
   // testDisplay(d1);
