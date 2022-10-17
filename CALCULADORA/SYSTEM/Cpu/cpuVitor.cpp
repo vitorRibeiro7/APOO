@@ -81,6 +81,9 @@ void CpuVitor::receiveControl(Control control)
         this->memo = 0;
         this->memo1 = 0;
         this->memo2 = 0;
+
+        this->digitsMemoryCount = 0;
+        this->memory = 0;
         break;
     case MEMORY_SUBTRACTION:
         if (this->controlOp == 0 && this->digitsOperand2Count == 0)
