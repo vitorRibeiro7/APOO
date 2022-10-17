@@ -120,7 +120,7 @@ void CpuVitor::receiveControl(Control control)
             this->memo2 = charToFloat(this->memo2Char);
             this->memory = this->memory + this->memo2;
 
-            return;
+            // return;
         }
 
         break;
