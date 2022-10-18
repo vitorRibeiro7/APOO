@@ -21,6 +21,11 @@ CpuVitor::CpuVitor()
 
 void CpuVitor::receiveDigit(Digit digit)
 {
+
+    // if (this->operation == SUBTRACTION)
+    // {
+    //     this->display->setSignal(NEGATIVE);
+    // }
     this->digitsOperand1Count == 0 && this->operation == NOOP ? this->display->clear() : void();
 
     // Guardo o dígito no operanto correspondente
@@ -219,10 +224,10 @@ void CpuVitor::operate()
 
     this->controlOp++;
 
-    // debug(this->digitsOperand1);
+    debug(this->digitsOperand1, this->digitsOperand1Count);
 
-    // this->display->clear();
-    // showDigit(this->digitsOperand1, &this->digitsOperand1Count, &this->dotControlFirstOp);
+    this->display->clear();
+    showDigit(this->digitsOperand1, &this->digitsOperand1Count, &this->dotControlFirstOp);
 }
 
 float CpuVitor::charToFloat(char *str)
@@ -317,6 +322,10 @@ void CpuVitor::convertResultToDigit(float num, int size)
     if (num < 0 || result[0] == '-')
     {
         this->display->setSignal(NEGATIVE);
+    }
+    else
+    {
+        this->display->setSignal(POSITIVE);
     }
 
     // std::cout << '\n';

@@ -23,7 +23,7 @@ private:
     float charToFloat(char *str);
 
     void memoryCopy(Digit *, int size);
-    
+
     void debug(Digit *, int size);
 
     void showDigit(Digit *, int *, int *);
