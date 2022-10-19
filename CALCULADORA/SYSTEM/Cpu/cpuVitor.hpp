@@ -19,7 +19,7 @@ private:
     void floatToChar(float operation, char *str);
     void convertResultToDigit(float num, int size);
     int countChar(char *str);
-    void digitsToChar(char *vet, Digit *digits, int size, bool dot, int pos);
+    void digitsToChar(char *vet, Digit *digits, int size, bool dot, int pos, bool sig);
     float charToFloat(char *str);
 
     void memoryCopy(Digit *, int size);
@@ -41,6 +41,10 @@ private:
 
     int controlOp = 0;
     float saveLastNum = 0;
+
+    bool memoSignal = true;
+    bool memo1Signal = true;
+    bool memo2Signal = true;
 
     Operation memOp = NOOP;
     Digit digitsMemory[MAX_DIGITS];

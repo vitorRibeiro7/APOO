@@ -6,7 +6,7 @@ void DisplayVitor::refresh()
 {
     console.set_color(Color::BG_Black);
     console.set_color(Color::FG_Magenta);
-    console.clear_screen();
+    // console.clear_screen();
 
     if (this->decimalSeparatorCount > 0)
     {
