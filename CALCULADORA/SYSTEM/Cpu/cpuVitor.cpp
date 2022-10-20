@@ -22,11 +22,7 @@ CpuVitor::CpuVitor()
 void CpuVitor::receiveDigit(Digit digit)
 {
 
-    // if (this->operation == SUBTRACTION)
-    // {
-    //     this->display->setSignal(NEGATIVE);
-    // }
-    // this->digitsOperand1Count == 0 && this->operation == NOOP ? this->display->clear() : void();
+    this->digitsOperand1Count == 0 && this->operation == NOOP ? this->display->clear() : void();
 
     // Guardo o dígito no operanto correspondente
     if (this->operation == NOOP)
@@ -39,25 +35,19 @@ void CpuVitor::receiveDigit(Digit digit)
     }
 
     // Envio o dígito para o Display
-    // this->display->addDigit(digit, this->decimal_separator);
+    this->display->addDigit(digit, this->decimal_separator);
 }
 
 void CpuVitor::receiveOperation(Operation op)
 {
     // Guardo a operação, mas antes verificar se já existe uma definida e já exisite um operand2
-    // if (op == EQUAL && this->digitsOperand2Count == 0)
-    // {
-    //     operate();
-    //     return;
-    // }
-
     if ((this->operation != NOOP) && (this->digitsOperand2Count > 0))
     {
         this->operate();
     }
 
+    this->display->clear();
     this->operation = op;
-    // this->memOp = op;
 }
 
 void CpuVitor::receiveControl(Control control)
@@ -83,12 +73,9 @@ void CpuVitor::receiveControl(Control control)
     case OFF:
         break;
     case MEMORY_READ_CLEAR:
-        this->memo = 0;
-        this->memo1 = 0;
-        this->memo2 = 0;
 
-        this->digitsMemoryCount = 0;
-        this->memory = 0;
+        showDigit(this->digitsMemory, &this->digitsMemoryCount, &this->dotControlMemory);
+
         break;
     case MEMORY_SUBTRACTION:
         if (this->controlOp == 0 && this->digitsOperand2Count == 0)
@@ -180,30 +167,30 @@ void CpuVitor::operate()
     this->memo1 = charToFloat(this->memo1Char);
     this->memo2 = charToFloat(this->memo2Char);
 
-    std::cout << '\n';
-    std::cout << this->memo1;
-    std::cout << '\n';
-    std::cout << '\n';
-    std::cout << this->memo2;
-    std::cout << '\n';
+    // std::cout << '\n';
+    // std::cout << this->memo1;
+    // std::cout << '\n';
+    // std::cout << '\n';
+    // std::cout << this->memo2;
+    // std::cout << '\n';
 
     switch (this->operation)
     {
     case ADDITION:
         this->memo = this->memo1 + this->memo2;
-        // std::cout << '+';
+        std::cout << '+';
         break;
     case SUBTRACTION:
         this->memo = this->memo1 - this->memo2;
-        // std::cout << '-';
+        std::cout << '-';
         break;
     case MULTIPLICATION:
         this->memo = this->memo1 * this->memo2;
-        // std::cout << 'x';
+        std::cout << 'x';
         break;
     case DIVISION:
         this->memo = this->memo1 / this->memo2;
-        // std::cout << '/';
+        std::cout << '/';
         break;
     case SQUARE_ROOT:
         this->memo = sqrt(this->memo1);
@@ -215,16 +202,13 @@ void CpuVitor::operate()
         break;
     }
 
-    // this->saveLastNum = this->memo2;
-    // this->controlOp++;
-
     floatToChar(this->memo, this->memochar);
     this->memoCount = countChar(this->memochar);
     convertResultToDigit(this->memo, this->memoCount);
 
     this->controlOp++;
 
-    // debug(this->digitsOperand1, this->digitsOperand1Count);
+    debug(this->digitsOperand1, this->digitsOperand1Count);
 
     this->display->clear();
     showDigit(this->digitsOperand1, &this->digitsOperand1Count, &this->dotControlFirstOp);
@@ -343,7 +327,6 @@ void CpuVitor::convertResultToDigit(float num, int size)
 
     this->digitsOperand1Count = 0;
     this->digitsOperand2Count = 0;
-    // this->operation = NOOP;
 
     for (int i = 0; i < size; i++)
     {
@@ -453,9 +436,9 @@ void CpuVitor::debug(Digit *digit, int size)
             break;
         }
     }
-    //  std::cout << "\n"
+    // std::cout << "\n"
     //           << this->digitsOperand1Count << "\n";
-    //  std::cout << this->dotControlFirstOp;
+    // std::cout << this->dotControlFirstOp;
 }
 
 int CpuVitor::countChar(char *str)

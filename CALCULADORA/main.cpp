@@ -14,7 +14,7 @@ void testDisplay(DisplayVitor &display)
   display.addDigit(ZERO);
   display.addDigit(ZERO);
   display.addDigit(ONE);
-  display.addDigit(TWO);
+  display.addDigit(TWO, true);
   display.addDigit(THREE);
   display.addDigit(FOUR);
   display.addDigit(FIVE);
@@ -96,17 +96,13 @@ void testKeyboard(Keyboard &keyboard)
     // keyboard.findKey('1').press();
 
     keyboard.findKey('2').press();
-    keyboard.findKey('0').press();
-    keyboard.findKey('-').press();
+    keyboard.findKey('.').press();
     keyboard.findKey('2').press();
-    keyboard.findKey('0').press();
-    keyboard.findKey('-').press();
+    keyboard.findKey('+').press();
     keyboard.findKey('2').press();
-    keyboard.findKey('0').press();
-    keyboard.findKey('-').press();
-    keyboard.findKey('2').press();
-    keyboard.findKey('0').press();
     keyboard.findKey('=').press();
+    keyboard.findKey('A').press();
+    keyboard.findKey('D').press();
   }
   catch (const char *exception)
   {
@@ -139,11 +135,12 @@ int main()
   KeyVitor keySubtraction('-', SUBTRACTION);
   KeyVitor keyMultiplication('x', MULTIPLICATION);
   KeyVitor keyDivision('/', DIVISION);
-  KeyVitor keySquare('sqr', SQUARE_ROOT);
+  KeyVitor keySquare('V', SQUARE_ROOT);
   KeyVitor keyEqual('=', EQUAL);
 
-  KeyVitor keyMadd('ma', MEMORY_ADDICTION);
-  KeyVitor keyMsub('ms', MEMORY_SUBTRACTION);
+  KeyVitor keyMadd('A', MEMORY_ADDICTION);
+  KeyVitor keyMsub('S', MEMORY_SUBTRACTION);
+  KeyVitor keyMshow('D', MEMORY_READ_CLEAR);
 
   /* Fase de construção/ligação */
   c1.setDisplay(d1);
@@ -171,6 +168,7 @@ int main()
 
   kb1.addKey(keyMsub);
   kb1.addKey(keyMadd);
+  kb1.addKey(keyMshow);
 
   /* Fase de testes */
   // testDisplay(d1);

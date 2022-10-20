@@ -37,6 +37,7 @@ public:
     static void set_color_fg256(int color);
     static void set_color_bg256(int color);
     static void reset_color();
+    static void set_color_rgb(int r, int g, int b);
 
     static void clear_screen();
 };
