@@ -103,6 +103,7 @@ void testKeyboard(Keyboard &keyboard)
     keyboard.findKey('=').press();
     keyboard.findKey('A').press();
     keyboard.findKey('D').press();
+    keyboard.findKey('D').press();
   }
   catch (const char *exception)
   {

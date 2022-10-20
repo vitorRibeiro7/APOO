@@ -74,7 +74,17 @@ void CpuVitor::receiveControl(Control control)
         break;
     case MEMORY_READ_CLEAR:
 
-        showDigit(this->digitsMemory, &this->digitsMemoryCount, &this->dotControlMemory);
+        this->control_mrc++;
+        if (this->control_mrc >= 2)
+        {
+            this->memory = 0;
+            this->control_mrc = 0;
+            this->digitsMemoryCount = 0;
+        }
+        else
+        {
+            showDigit(this->digitsMemory, &this->digitsMemoryCount, &this->dotControlMemory);
+        }
 
         break;
     case MEMORY_SUBTRACTION:

@@ -39,6 +39,8 @@ private:
 
     Signal signal;
 
+    int control_mrc = 0;
+
     int controlOp = 0;
     float saveLastNum = 0;
 
